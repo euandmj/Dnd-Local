@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="DndL.Gui.Views.PaintCanvasView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DndL.Gui.Views"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:lcvtr="clr-namespace:DndL.Gui.Converters"
+             mc:Ignorable="d" 
+             VerticalAlignment="Stretch"
+             HorizontalAlignment="Stretch"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <lcvtr:BrushToColourConverter x:Key="BrushToColourConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>        
+        
+        <Canvas x:Name="Canvas"
+                Background="{Binding CanvasBrush}"
+                MouseLeftButtonDown="Canvas_MouseLeftButtonDown"
+                MouseMove="Canvas_MouseMove"
+                MouseLeftButtonUp="Canvas_MouseLeftButtonUp"
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.RowSpan="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+
+        </Canvas>
+        
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Stretch"
+                    Grid.Row="0"
+                    Grid.Column="0">
+            <Button Width="auto"
+                    Height="auto"
+                    Content="FoooBar"
+                    Command="{Binding FooCommand}"/>
+
+
+            <xctk:DoubleUpDown Value="{Binding StrokeThickness, Mode=TwoWay}"
+                               DefaultValue="{Binding StrokeThickness, Mode=OneTime}"
+                               Minimum="0"
+                               Maximum="70"
+                               Width="auto"/>            
+
+            <xctk:ColorPicker Width="70"
+                              SelectedColor="{Binding Stroke, Mode=TwoWay, Converter={StaticResource BrushToColourConverter}}" />
+        </StackPanel>
+
+    </Grid>
+    
+</UserControl>

@@ -1,0 +1,31 @@
+﻿syntax = "proto3";
+import "google/protobuf/empty.proto";
+option csharp_namespace = "DndL.Client";
+
+package greet;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc FullDuplexHello (stream HelloRequest) returns (stream HelloReply);
+
+  rpc SendPoints (PointPacket) returns (google.protobuf.Empty);
+  rpc Subscribe (google.protobuf.Empty) returns (stream PointPacket);
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+  
+}
+
+message PointPacket {
+	double X = 1;
+	double Y = 2;
+}
