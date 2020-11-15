@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DndL.Client\DndL.Client.csproj" />
+    <ProjectReference Include="..\DndL.Core\DndL.Core.csproj" />
   </ItemGroup>
 
 </Project>

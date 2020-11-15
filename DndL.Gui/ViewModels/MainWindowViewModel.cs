@@ -7,13 +7,18 @@ using System.Text;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using DndL.Core.Events;
 
 namespace DndL.Gui.ViewModels
 {
     class MainWindowViewModel
         : BaseViewModel
     {
+        public event EventHandler<DrawnLineEventArgs> PointReceived;
+
         private readonly ClientContainer client;
+
+        
 
 
         public MainWindowViewModel()
@@ -33,24 +38,21 @@ namespace DndL.Gui.ViewModels
 
             await Task.Run(async () =>
             {
-                while(await call.ResponseStream.MoveNext(ctx.Token))
+                while (await call.ResponseStream.MoveNext(ctx.Token))
                 {
                     var curr = call.ResponseStream.Current;
 
-                    Debug.WriteLine($"{curr.X} : {curr.Y}");
+                    PointReceived?.Invoke(this, new DrawnLineEventArgs(curr.ToDrawnLine()));
                 }
             });
 
         }
-        
 
-
-        public async void OnLineDrawn(object sender, LineDrawnEventArgs e)
+        internal async void OnLineDrawn(object sender, DrawnLineEventArgs e)
         {
             await Task.Run(async () =>
             {
-                await client.SendPoint(
-                    new PointPacket { X = e.Point.X, Y = e.Point.Y });
+                await client.SendPoint(e.Point.ToPointPacket());
             });
         }
     }

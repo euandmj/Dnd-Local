@@ -32,7 +32,9 @@ namespace DndL.Gui
 
             // bridge the gap between the canvas control drawing lines 
             // and the main view model knowing about it. 
-            Canvas.LineDrawnEvent += viewModel.OnLineDrawn;
+            Canvas.LineDrawn += viewModel.OnLineDrawn;
+            //viewModel
+            viewModel.PointReceived += Canvas.OnAddPoint;
         }
     }
 }

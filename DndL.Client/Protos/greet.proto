@@ -9,9 +9,12 @@ service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply);
   rpc FullDuplexHello (stream HelloRequest) returns (stream HelloReply);
+}
 
-  rpc SendPoints (PointPacket) returns (google.protobuf.Empty);
+service PointService {
+  rpc SendPoint (PointPacket) returns (google.protobuf.Empty);
   rpc Subscribe (google.protobuf.Empty) returns (stream PointPacket);
+
 }
 
 // The request message containing the user's name.
@@ -26,6 +29,10 @@ message HelloReply {
 }
 
 message PointPacket {
-	double X = 1;
-	double Y = 2;
+	repeated int32 X = 1;
+	repeated int32 Y = 2;
+	string StrokeBrush = 3;
+	int32 StrokeThickness = 4;
 }
+
+

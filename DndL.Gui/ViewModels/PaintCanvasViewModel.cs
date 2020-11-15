@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DndL.Core.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -11,7 +12,7 @@ namespace DndL.Gui.ViewModels
     class PaintCanvasViewModel
         : BaseViewModel
     {
-        private EventHandler<LineDrawnEventArgs> LineDrawnEvent;
+        private EventHandler<DrawnLineEventArgs> LineDrawnEvent;
 
         private double strokeThickness = 1;
         private SolidColorBrush stroke = Brushes.Blue;
@@ -47,21 +48,9 @@ namespace DndL.Gui.ViewModels
         }
 
 
-        private void OnLineDrawn(object sender, LineDrawnEventArgs e)
+        private void OnLineDrawn(object sender, DrawnLineEventArgs e)
         {
 
-        }
-    }
-
-
-    public class LineDrawnEventArgs
-        : EventArgs
-    {
-        public Point Point { get; }
-
-        public LineDrawnEventArgs(Point newP)
-        {
-            Point = newP;
         }
     }
 }

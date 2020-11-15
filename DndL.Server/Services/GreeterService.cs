@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
@@ -38,17 +39,6 @@ namespace DndL.Server
 
                 await responseStream.WriteAsync(new HelloReply { Message = resp });
             }
-        }
-
-        public override Task<Empty> SendPoints(PointPacket request, ServerCallContext context)
-        {
-            Console.WriteLine($"{request.X} : {request.Y}");
-            return Task.FromResult(new Empty());
-        }
-
-        public override async Task Subscribe(Empty request, IServerStreamWriter<PointPacket> responseStream, ServerCallContext context)
-        {
-
         }
 
         //public override async Task PointStream(IAsyncStreamReader<PointPacket> requestStream, IServerStreamWriter<PointPacket> responseStream, ServerCallContext context)

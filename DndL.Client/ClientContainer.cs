@@ -1,4 +1,5 @@
-﻿using Grpc.Net.Client;
+﻿using DndL.Core.Model;
+using Grpc.Net.Client;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,19 +10,20 @@ namespace DndL.Client
         : IDisposable
     {
         private bool disposedValue;
-        public readonly Greeter.GreeterClient _client =
-            new Greeter.GreeterClient(
+        public readonly PointService.PointServiceClient _client =
+            new PointService.PointServiceClient(
                 GrpcChannel.ForAddress("https://localhost:5001"));
 
+
         public async Task SendPoint(PointPacket p)
-            => await _client.SendPointsAsync(p);
+            => await _client.SendPointAsync(p);
 
         public IAsyncEnumerable<PointPacket> PointStream()
         {
             var call = _client.Subscribe(new Google.Protobuf.WellKnownTypes.Empty());
 
             return call.ResponseStream
-                .ToAsyncEnumerable();
+                .ToAsyncEnumerable();            
         }
 
 
@@ -56,5 +58,31 @@ namespace DndL.Client
             GC.SuppressFinalize(this);
         }
         #endregion
+    }
+
+    public static class DrawnLine_PointPacket_ConversionExtensions
+    {
+        public static PointPacket ToPointPacket(this DrawnLine dl)
+        {
+            var pp = new PointPacket
+            {
+                StrokeBrush = dl.StrokeBrush,
+                StrokeThickness = dl.StrokeThickness
+            };
+
+            pp.X.AddRange(dl.X);
+            pp.Y.AddRange(dl.Y);
+
+            return pp;
+        }
+
+        public static Core.Model.DrawnLine ToDrawnLine(this PointPacket pp)
+            => new Core.Model.DrawnLine
+            {
+                X = pp.X,
+                Y = pp.Y,
+                StrokeBrush = pp.StrokeBrush,
+                StrokeThickness = pp.StrokeThickness
+            };
     }
 }
