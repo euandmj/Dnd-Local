@@ -10,14 +10,14 @@ namespace DndL.Gui.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is SolidColorBrush b)) return null;
+            if (value is not SolidColorBrush b) return null;
 
             return b.Color;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is Color c)) return null;
+            if (value is not Color c) return null;
 
             return new SolidColorBrush(c);
         }

@@ -1,6 +1,5 @@
 ﻿using DndL.Core.Model;
 using System;
-using System.Drawing;
 
 namespace DndL.Core.Events
 {

@@ -34,7 +34,7 @@ namespace DndL.Gui
             // and the main view model knowing about it. 
             Canvas.LineDrawn += viewModel.OnLineDrawn;
             //viewModel
-            viewModel.PointReceived += Canvas.OnAddPoint;
+            viewModel.LineReceived += Canvas.OnAddPoint;
         }
     }
 }

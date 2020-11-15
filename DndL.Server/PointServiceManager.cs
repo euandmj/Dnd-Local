@@ -1,8 +1,6 @@
-﻿using DndL.Core.Events;
-using DndL.Core.Model;
+﻿using DndL.Core.Model;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Reactive.Linq;
 
@@ -10,21 +8,18 @@ namespace DndL.Server
 {
     public class PointServiceController
     {
-        public EventHandler<DrawnLineEventArgs> PointAdded;
-        public EventHandler<DrawnLineEventArgs> PointRemoved;
-        public EventHandler<DrawnLineEventArgs> PointsCleared;
-
         public event Action<DrawnLine> Added;
 
+        private readonly List<DrawnLine> points = new();
 
-        private List<DrawnLine> points = new();
 
-        public PointServiceController()
+
+        private void AddLine(DrawnLine nl)
         {
+            points.Add(nl);
         }
 
-
-        public void AddPoint(PointPacket packet)
+        public void Add(PointPacket packet)
         {
             var newLine = new DrawnLine
             {
@@ -34,11 +29,11 @@ namespace DndL.Server
                 StrokeThickness = packet.StrokeThickness
             };
 
-            points.Add(newLine);
+            AddLine(newLine);
             Added?.Invoke(newLine);
         }
 
-        public IObservable<DrawnLine> GetPoints()
+        public IObservable<DrawnLine> Get()
         {
             var existing = points.AsReadOnly().ToObservable();
             var newl = Observable.FromEvent<DrawnLine>((x) => Added += x, (x) => Added -= x);
@@ -46,7 +41,7 @@ namespace DndL.Server
             return existing.Concat(newl);
         }
 
-
-        public static readonly PointServiceController PointController = new PointServiceController();
+        private static readonly Lazy<PointServiceController> PSC = new Lazy<PointServiceController>(() => new PointServiceController());
+        public static PointServiceController Instance => PSC.Value;
     }
 }

@@ -1,20 +1,16 @@
 ﻿using DndL.Client;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Channels;
-using System.Threading.Tasks;
 using DndL.Core.Events;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace DndL.Gui.ViewModels
 {
     class MainWindowViewModel
         : BaseViewModel
     {
-        public event EventHandler<DrawnLineEventArgs> PointReceived;
+        public event EventHandler<DrawnLineEventArgs> LineReceived;
 
         private readonly ClientContainer client;
 
@@ -27,25 +23,31 @@ namespace DndL.Gui.ViewModels
 
             client = new ClientContainer();
 
-            doofoo();
+            DoSubscribe();
                 
         }
 
-        async void doofoo()
+        async void DoSubscribe()
         {
-            var ctx = new CancellationTokenSource();
-            var call = client._client.Subscribe(new Google.Protobuf.WellKnownTypes.Empty());
-
-            await Task.Run(async () =>
+            try
             {
-                while (await call.ResponseStream.MoveNext(ctx.Token))
+                var ctx = new CancellationTokenSource();
+                var call = client._client.Subscribe(new Google.Protobuf.WellKnownTypes.Empty());
+
+                await Task.Run(async () =>
                 {
-                    var curr = call.ResponseStream.Current;
+                    while (await call.ResponseStream.MoveNext(ctx.Token))
+                    {
+                        var curr = call.ResponseStream.Current;
 
-                    PointReceived?.Invoke(this, new DrawnLineEventArgs(curr.ToDrawnLine()));
-                }
-            });
-
+                        LineReceived?.Invoke(this, new DrawnLineEventArgs(curr.ToDrawnLine()));
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("Lines Subscription Errored:\n{0}", ex.Message), $"{ex.GetType()}", MessageBoxButton.OK);
+            }
         }
 
         internal async void OnLineDrawn(object sender, DrawnLineEventArgs e)

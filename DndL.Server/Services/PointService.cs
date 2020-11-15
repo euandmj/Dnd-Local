@@ -1,8 +1,7 @@
-﻿using Google.Protobuf.WellKnownTypes;
+﻿using DndL.Server.Extensions;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,12 +16,12 @@ namespace DndL.Server.Services
         public PointServiceGrpcServer(ILogger<PointServiceGrpcServer> logger)
         {
             _logger = logger;
-            _controller = PointServiceController.PointController;
+            _controller = PointServiceController.Instance;
         }
 
         public override async Task<Empty> SendPoint(PointPacket request, ServerCallContext context)
         {
-            _controller.AddPoint(request);
+            _controller.Add(request);
             return await Task.FromResult(new Empty());
         }
 
@@ -32,7 +31,7 @@ namespace DndL.Server.Services
             try
             {
                 await _controller
-                    .GetPoints()
+                    .Get()
                     .ToAsyncEnumerable()
                     .ForEachAwaitAsync(async (x) => await responseStream.WriteAsync(x.ToPointPacket()), context.CancellationToken)
                     .ConfigureAwait(false);
@@ -43,33 +42,4 @@ namespace DndL.Server.Services
             }
         }
     }
-
-
-    public static class DrawnLine_PointPacket_ConversionExtensions
-    {
-        public static PointPacket ToPointPacket(this Core.Model.DrawnLine dl)
-        {
-            var pp = new PointPacket
-            {
-                StrokeBrush = dl.StrokeBrush,
-                StrokeThickness = dl.StrokeThickness
-            };
-
-            pp.X.AddRange(dl.X);
-            pp.Y.AddRange(dl.Y);
-
-            return pp;
-        }
-
-        public static Core.Model.DrawnLine ToDrawnLine(this PointPacket pp)
-            => new Core.Model.DrawnLine
-            {
-                X = pp.X,
-                Y = pp.Y,
-                StrokeBrush = pp.StrokeBrush,
-                StrokeThickness = pp.StrokeThickness
-            };
-
-    }
-
 }

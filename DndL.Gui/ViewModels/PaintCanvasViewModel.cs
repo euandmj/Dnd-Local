@@ -12,7 +12,7 @@ namespace DndL.Gui.ViewModels
     class PaintCanvasViewModel
         : BaseViewModel
     {
-        private EventHandler<DrawnLineEventArgs> LineDrawnEvent;
+        public EventHandler<DrawnLineEventArgs> LineDrawnEvent;
 
         private double strokeThickness = 1;
         private SolidColorBrush stroke = Brushes.Blue;
