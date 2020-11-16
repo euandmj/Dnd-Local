@@ -1,4 +1,5 @@
 ﻿using DndL.Core.Model;
+using DndL.Server.Core.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,11 @@ using System.Reactive.Linq;
 namespace DndL.Server.ServiceManagers
 {
     public class PointServiceController
+        : IServiceManager<PointServiceController, DrawnLine, PointPacket>
     {
         public event Action<DrawnLine> Added;
 
         private readonly List<DrawnLine> points = new();
-
-
 
         private void AddLine(DrawnLine nl)
         {
