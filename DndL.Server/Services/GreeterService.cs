@@ -40,18 +40,5 @@ namespace DndL.Server
                 await responseStream.WriteAsync(new HelloReply { Message = resp });
             }
         }
-
-        //public override async Task PointStream(IAsyncStreamReader<PointPacket> requestStream, IServerStreamWriter<PointPacket> responseStream, ServerCallContext context)
-        //{
-        //    //while (await requestStream.MoveNext())
-        //    //{
-        //    //    base.
-
-        //    //}
-        //    await base.PointStream(requestStream, responseStream, context);
-
-
-
-        //}
     }
 }

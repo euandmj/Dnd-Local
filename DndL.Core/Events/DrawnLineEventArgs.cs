@@ -12,5 +12,7 @@ namespace DndL.Core.Events
         {
             Point = newP;
         }
+
+        public delegate void DrawnLineEventHandler(DrawnLineEventArgs e);
     }
 }

@@ -31,13 +31,21 @@ namespace DndL.Gui
             };
         }
 
+        //[System.STAThread]
         public static Polyline ToPolyLine(this DrawnLine line)
-            => new Polyline()
-            {
-                Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(line.StrokeBrush)),
-                StrokeThickness = line.StrokeThickness,
-                Points = line.ToPointCollection()
-            };
+        //=> new Polyline()
+        //{
+        //    Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(line.StrokeBrush)),
+        //    StrokeThickness = line.StrokeThickness,
+        //    Points = line.ToPointCollection()
+        //};
+        {
+            var p = new Polyline();
+            p.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(line.StrokeBrush));
+            p.StrokeThickness = line.StrokeThickness;
+            p.Points = line.ToPointCollection();
+            return p;
+        }
 
         public static PointCollection ToPointCollection(this DrawnLine drawnLine)
         {
