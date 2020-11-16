@@ -1,11 +1,9 @@
 ﻿using DndL.Core.Events;
 using DndL.Gui.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace DndL.Gui.Views
@@ -43,36 +41,8 @@ namespace DndL.Gui.Views
                     Stroke = viewModel.Stroke,
                     StrokeThickness = viewModel.StrokeThickness
                 };
-
                 Canvas.Children.Add(line);
-
-                //LineStarted?.Invoke(this, new PointEventArgs(currentPoint.X, currentPoint.Y));
             }
-        }
-
-        internal void OnAddPoint(object sender, DrawnLineEventArgs e)
-        {
-            Canvas.Dispatcher.Invoke(() =>
-            {
-                Canvas.Children.Add(new Polyline()
-                {
-                    Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(e.Point.StrokeBrush)),
-                    StrokeThickness = e.Point.StrokeThickness,
-                    Points = GetPoints(e.Point.X, e.Point.Y)
-                });
-            });
-        }
-
-        private PointCollection GetPoints(IList<int> x, IList<int> y)
-        {
-            if (x.Count != y.Count)
-                throw new InvalidProgramException("lengths of received points should match");
-            var pc = new PointCollection();
-            for(int i = 0; i < x.Count; i++)
-            {
-                pc.Add(new Point(x[i], y[i]));
-            }
-            return pc;
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -97,6 +67,14 @@ namespace DndL.Gui.Views
             LineDrawn?.Invoke(
                 null, 
                 new DrawnLineEventArgs(line.ToDrawnLine(viewModel.Stroke, viewModel.StrokeThickness)));
+        }
+
+        internal void OnAddPoint(object sender, DrawnLineEventArgs e)
+        {
+            Canvas.Dispatcher.Invoke(() =>
+            {
+                Canvas.Children.Add(e.Point.ToPolyLine());
+            });
         }
     }
 }

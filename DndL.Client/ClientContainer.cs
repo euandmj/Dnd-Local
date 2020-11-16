@@ -1,4 +1,4 @@
-﻿using DndL.Core.Model;
+﻿using DndL.Client.Extensions;
 using Grpc.Net.Client;
 using System;
 using System.Collections.Generic;
@@ -58,31 +58,5 @@ namespace DndL.Client
             GC.SuppressFinalize(this);
         }
         #endregion
-    }
-
-    public static class DrawnLine_PointPacket_ConversionExtensions
-    {
-        public static PointPacket ToPointPacket(this DrawnLine dl)
-        {
-            var pp = new PointPacket
-            {
-                StrokeBrush = dl.StrokeBrush,
-                StrokeThickness = dl.StrokeThickness
-            };
-
-            pp.X.AddRange(dl.X);
-            pp.Y.AddRange(dl.Y);
-
-            return pp;
-        }
-
-        public static DrawnLine ToDrawnLine(this PointPacket pp)
-            => new DrawnLine
-            {
-                X = pp.X,
-                Y = pp.Y,
-                StrokeBrush = pp.StrokeBrush,
-                StrokeThickness = pp.StrokeThickness
-            };
-    }
+    }    
 }

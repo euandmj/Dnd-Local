@@ -1,4 +1,4 @@
-﻿using DndL.Client;
+﻿using DndL.Client.Extensions;
 using DndL.Core.Events;
 using System;
 using System.Threading;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DndL.Client
+namespace DndL.Client.Extensions
 {
     public static class IAsyncStreamReaderExtensions
     {

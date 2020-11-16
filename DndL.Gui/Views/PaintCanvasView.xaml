@@ -52,7 +52,7 @@
 
             <xctk:DoubleUpDown Value="{Binding StrokeThickness, Mode=TwoWay}"
                                DefaultValue="{Binding StrokeThickness, Mode=OneTime}"
-                               Minimum="0"
+                               Minimum="1"
                                Maximum="70"
                                Width="auto"/>            
 
