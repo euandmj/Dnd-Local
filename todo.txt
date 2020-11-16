@@ -1,0 +1,6 @@
+Clear canvas, and notify clients
+stop clients processing their own updates
+snap to grid
+grid resize
+grpc image serialization
+characters ui view collection<character>
