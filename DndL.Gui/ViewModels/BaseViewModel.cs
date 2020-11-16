@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DndL.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,7 +10,10 @@ namespace DndL.Gui.ViewModels
         : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
         private string title = string.Empty;
+        protected readonly ClientContainer client = new();
+
 
         public string Title
         {

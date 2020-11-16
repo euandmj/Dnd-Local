@@ -1,18 +1,18 @@
-﻿using DndL.Core.Events;
+﻿using DndL.Client;
+using DndL.Core.Events;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace DndL.Gui.ViewModels
 {
     class PaintCanvasViewModel
         : BaseViewModel
     {
-        public EventHandler<DrawnLineEventArgs> LineDrawnEvent;
+        public EventHandler<DrawnLineEventArgs> LineReceived;
 
         private double strokeThickness = 1;
         private SolidColorBrush stroke = Brushes.Blue;
@@ -23,8 +23,7 @@ namespace DndL.Gui.ViewModels
 
             FooCommand = new Commands.Command((x) => MessageBox.Show("foo"));
 
-            LineDrawnEvent += OnLineDrawn;
-
+            DoSubscribe();
         }
 
         public ICommand FooCommand { get; }
@@ -47,10 +46,35 @@ namespace DndL.Gui.ViewModels
             set => SetProperty(ref strokeThickness, value);
         }
 
-
-        private void OnLineDrawn(object sender, DrawnLineEventArgs e)
+        internal async void DoSubscribe()
         {
+            try
+            {
+                var ctx = new CancellationTokenSource();
+                var call = client._client.Subscribe(new Google.Protobuf.WellKnownTypes.Empty());
 
+                await Task.Run(async () =>
+                {
+                    while (await call.ResponseStream.MoveNext(ctx.Token))
+                    {
+                        var curr = call.ResponseStream.Current;
+
+                        LineReceived?.Invoke(this, new DrawnLineEventArgs(curr.ToDrawnLine()));
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("Lines Subscription Errored:\n{0}", ex.Message), $"{ex.GetType()}", MessageBoxButton.OK);
+            }
+        }
+
+        internal async void OnLineDrawn(object sender, DrawnLineEventArgs e)
+        {
+            await Task.Run(async () =>
+            {
+                await client.SendPoint(e.Point.ToPointPacket());
+            });
         }
     }
 }

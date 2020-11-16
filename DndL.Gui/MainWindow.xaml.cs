@@ -29,12 +29,6 @@ namespace DndL.Gui
             InitializeComponent();
 
             DataContext = viewModel = new MainWindowViewModel();
-
-            // bridge the gap between the canvas control drawing lines 
-            // and the main view model knowing about it. 
-            Canvas.LineDrawn += viewModel.OnLineDrawn;
-            //viewModel
-            viewModel.LineReceived += Canvas.OnAddPoint;
         }
     }
 }

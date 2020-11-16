@@ -76,8 +76,8 @@ namespace DndL.Client
             return pp;
         }
 
-        public static Core.Model.DrawnLine ToDrawnLine(this PointPacket pp)
-            => new Core.Model.DrawnLine
+        public static DrawnLine ToDrawnLine(this PointPacket pp)
+            => new DrawnLine
             {
                 X = pp.X,
                 Y = pp.Y,

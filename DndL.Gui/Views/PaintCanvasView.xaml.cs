@@ -15,7 +15,7 @@ namespace DndL.Gui.Views
     /// </summary>
     public partial class PaintCanvasView : UserControl
     {
-        public EventHandler<DrawnLineEventArgs> LineStarted;
+        //public EventHandler<DrawnLineEventArgs> LineStarted;
         public EventHandler<DrawnLineEventArgs> LineDrawn;
 
         private Point currentPoint;
@@ -26,10 +26,10 @@ namespace DndL.Gui.Views
         {
             InitializeComponent();
 
-
             DataContext = viewModel = new PaintCanvasViewModel();
 
-            
+            LineDrawn += viewModel.OnLineDrawn;
+            viewModel.LineReceived += OnAddPoint;
         }
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
