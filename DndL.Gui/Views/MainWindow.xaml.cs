@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DndL.Gui
+namespace DndL.Gui.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
