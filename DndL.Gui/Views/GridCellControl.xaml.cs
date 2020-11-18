@@ -1,15 +1,10 @@
-﻿using DndL.Gui.Controls;
-using DndL.Gui.Model;
-using DndL.Gui.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,17 +16,17 @@ using System.Windows.Shapes;
 namespace DndL.Gui.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GridCellControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GridCellControl : UserControl
     {
-        private readonly MainWindowViewModel viewModel;
-
-        public MainWindow()
+        public GridCellControl()
         {
             InitializeComponent();
-
-            DataContext = viewModel = new MainWindowViewModel();
         }
+
+
+        public int X { get; init; }
+        public int Y { get; init; }
     }
 }

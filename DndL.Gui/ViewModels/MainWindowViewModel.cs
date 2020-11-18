@@ -11,9 +11,11 @@ namespace DndL.Gui.ViewModels
         : BaseViewModel
     {      
 
-
         public MainWindowViewModel()
         {
+
+
+            
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DndL.Client.Extensions;
 using DndL.Core.Events;
 using DndL.Gui.Commands;
+using DndL.Gui.Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading;
@@ -19,8 +20,12 @@ namespace DndL.Gui.ViewModels
         public DrawnLineEventHandler LineReceived;
         public DrawnLineEventHandler LineDrawn;
 
-        private double strokeThickness = 1;
-        private SolidColorBrush stroke = Brushes.Blue;
+        private CanvasBrush activeBrush;
+        private CanvasBrush brush1 = new();
+        private CanvasBrush brush2 = new();
+
+        //private double strokeThickness = 1;
+        //private SolidColorBrush stroke = Brushes.Blue;
         private SolidColorBrush canvasBrush = Brushes.AntiqueWhite;
 
         private Point currentPoint;
@@ -33,23 +38,24 @@ namespace DndL.Gui.ViewModels
             LineDrawn += OnLineDrawn;
             LineReceived += OnLineReceived;
 
-            FooCommand      = new Command((x) => MessageBox.Show("foo"));
-            MouseUpCommand  = new Command((x) =>
+            Brush1Command = new Command((x) => ActiveBrush = brush1);
+            Brush2Command = new Command((x) => ActiveBrush = brush2);
+            MouseUpCommand = new Command((x) =>
             {
-                if (currentLine?.Points?.Count != 0)
-                    LineDrawn?.Invoke(new DrawnLineEventArgs(currentLine.ToDrawnLine(stroke, strokeThickness)));
+                if (currentLine?.Points?.Count > 0)
+                    LineDrawn?.Invoke(
+                        new DrawnLineEventArgs(
+                            currentLine.ToDrawnLine(ActiveBrush.Color, 
+                            ActiveBrush.Thickness)));
             });
+
+            activeBrush = brush1;
         }
 
         public ObservableCollection<IInputElement> CanvasChildren { get; set; } = new();
-        public ICommand FooCommand { get; }
+        public ICommand Brush1Command { get; }
+        public ICommand Brush2Command { get; }
         public ICommand MouseUpCommand { get; }
-
-        public SolidColorBrush Stroke 
-        {
-            get => stroke;
-            set => SetProperty(ref stroke, value);
-        }
 
         public SolidColorBrush CanvasBrush
         {
@@ -57,11 +63,24 @@ namespace DndL.Gui.ViewModels
             set => SetProperty(ref canvasBrush, value);
         }
 
-        public double StrokeThickness
+        public CanvasBrush ActiveBrush
         {
-            get => strokeThickness;
-            set => SetProperty(ref strokeThickness, value);
+            get => activeBrush;
+            set => SetProperty(ref activeBrush, value);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private async void Subcribe_PointStream()
         {
@@ -69,7 +88,7 @@ namespace DndL.Gui.ViewModels
             {
                 var ctx = new CancellationTokenSource();
                 var call = client._client.Subscribe(new Google.Protobuf.WellKnownTypes.Empty());
-                
+
                 await Task.Run(async () =>
                 {
                     while (await call.ResponseStream.MoveNext(ctx.Token))
@@ -81,8 +100,7 @@ namespace DndL.Gui.ViewModels
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(string.Format("Lines Subscription Errored:\n{0}", ex.Message), $"{ex.GetType()}", MessageBoxButton.OK);
-                throw;
+                System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
 
@@ -94,8 +112,8 @@ namespace DndL.Gui.ViewModels
 
                 currentLine = new Polyline()
                 {
-                    Stroke = Stroke,
-                    StrokeThickness = StrokeThickness
+                    Stroke = ActiveBrush.Color,
+                    StrokeThickness = ActiveBrush.Thickness
                 };
                 CanvasChildren.Add(currentLine);
             }
@@ -117,11 +135,18 @@ namespace DndL.Gui.ViewModels
                 //TODO: compress lines after N 
             }
         }
-        
+
 
         internal async void OnLineDrawn(DrawnLineEventArgs e)
         {
-            await client.SendPoint(e.Point.ToPointPacket());
+            try
+            {
+                await client.SendPoint(e.Point.ToPointPacket());
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
         }
 
 

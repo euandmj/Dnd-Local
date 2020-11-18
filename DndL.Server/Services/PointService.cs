@@ -20,13 +20,17 @@ namespace DndL.Server.Services
             _controller = PointServiceController.Instance;
         }
 
-        public override async Task<Empty> SendPoint(PointPacket request, ServerCallContext context)
+        public override async Task<Empty> SendPoint(
+            PointPacket request, 
+            ServerCallContext context)
         {
             _controller.Add(request);
             return await Task.FromResult(new Empty());
         }
 
-        public override async Task Subscribe(Empty request, IServerStreamWriter<PointPacket> responseStream, ServerCallContext context)
+        public override async Task Subscribe(Empty request, 
+            IServerStreamWriter<PointPacket> responseStream, 
+            ServerCallContext context)
         {
 
             try

@@ -7,6 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:lcvtr="clr-namespace:DndL.Gui.Converters"
+             xmlns:model="clr-namespace:DndL.Gui.Model"
              mc:Ignorable="d" 
              VerticalAlignment="Stretch"
              HorizontalAlignment="Stretch"
@@ -27,12 +28,13 @@
             <RowDefinition Height="35" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
 
         <Canvas x:Name="Canvas"
                 Background="{Binding CanvasBrush}"
-                Grid.Row="0"
+                Grid.Row="1"
                 Grid.Column="0"
-                Grid.RowSpan="2"
+                Grid.RowSpan="1"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
             <ItemsControl ItemsSource="{Binding CanvasChildren, Mode=TwoWay}">
@@ -55,6 +57,8 @@
                     <ity:InvokeCommandAction Command="{Binding MouseUpCommand}" />
                 </ity:EventTrigger>
             </ity:Interaction.Triggers>
+            
+            
 
         </Canvas>
         
@@ -62,21 +66,52 @@
                     VerticalAlignment="Stretch"
                     Grid.Row="0"
                     Grid.Column="0">
+            
             <Button Width="auto"
                     Height="auto"
-                    Content="FoooBar"
-                    Command="{Binding FooCommand}"/>
+                    Content="Move"
+                    Command="{Binding FooCommand}" />
+            <Button Width="auto"
+                    Height="auto"
+                    Content="Brush1"
+                    Command="{Binding Brush1Command}" />
+            <Button Width="auto"
+                    Height="auto"
+                    Content="Brush2"
+                    Command="{Binding Brush2Command}" />
 
 
-            <xctk:DoubleUpDown Value="{Binding StrokeThickness, Mode=TwoWay}"
-                               DefaultValue="{Binding StrokeThickness, Mode=OneTime}"
+            <xctk:DoubleUpDown Value="{Binding ActiveBrush.Thickness, Mode=TwoWay}"
+                               DefaultValue="{Binding ActiveBrush.Thickness, Mode=OneTime}"
                                Minimum="1"
                                Maximum="70"
                                Width="auto"/>            
 
             <xctk:ColorPicker Width="70"
-                              SelectedColor="{Binding Stroke, Mode=TwoWay, Converter={StaticResource BrushToColourConverter}}" />
+                              SelectedColor="{Binding ActiveBrush.Color, Mode=TwoWay, Converter={StaticResource BrushToColourConverter}}" />
         </StackPanel>
+
+        <Grid x:Name="gridsnapper"
+              ShowGridLines="True"
+              IsHitTestVisible="True"
+              Background="Transparent"
+              VerticalAlignment="Stretch"
+              HorizontalAlignment="Stretch"
+              Grid.Column="0"
+              Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        </Grid>
 
     </Grid>
     
