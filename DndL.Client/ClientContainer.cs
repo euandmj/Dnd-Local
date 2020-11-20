@@ -1,4 +1,5 @@
 ﻿using DndL.Client.Extensions;
+using Grpc.Core;
 using Grpc.Net.Client;
 using System;
 using System.Collections.Generic;
@@ -10,22 +11,30 @@ namespace DndL.Client
         : IDisposable
     {
         private bool disposedValue;
-        public readonly PointService.PointServiceClient _client =
-            new PointService.PointServiceClient(
-                GrpcChannel.ForAddress("https://localhost:5001"));
+        private readonly CanvasService.CanvasServiceClient _client = 
+            new (GrpcChannel.ForAddress("https://localhost:5001"));
 
 
         public async Task SendPoint(PointPacket p)
             => await _client.SendPointAsync(p);
 
+        //public async Task SendClear(CanvasEventPacket c)
+        //    => 
+
+
+        //public AsyncServerStreamingCall<PointPacket> PointStream()
+        //{
+        //    return _client.PointSubscription(new Google.Protobuf.WellKnownTypes.Empty());
+        //}
+
+
         public IAsyncEnumerable<PointPacket> PointStream()
         {
-            var call = _client.Subscribe(new Google.Protobuf.WellKnownTypes.Empty());
+            var call = _client.PointSubscription(new Google.Protobuf.WellKnownTypes.Empty());
 
             return call.ResponseStream
-                .ToAsyncEnumerable();            
+                .ToAsyncEnumerable();
         }
-
 
 
         #region IDisposable

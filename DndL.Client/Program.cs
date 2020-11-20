@@ -13,39 +13,39 @@ namespace DndL.Client
         
         static async Task Main(string[] args)
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            //using var channel = GrpcChannel.ForAddress("https://localhost:5001");
 
-            Greeter.GreeterClient client = new(channel);
+            //Greeter.GreeterClient client = new(channel);
 
-            var reply = await client.SayHelloAsync(
-                new HelloRequest() { Name = "fooo" });
+            //var reply = await client.SayHelloAsync(
+            //    new HelloRequest() { Name = "fooo" });
 
-            WriteLine($"recv {reply.Message}");
+            //WriteLine($"recv {reply.Message}");
 
 
 
-            using var call = client.FullDuplexHello();            
+            //using var call = client.FullDuplexHello();            
             
 
-            var bitask = Task.Run(async () =>
-            {
-                while (await call.ResponseStream.MoveNext())
-                {
-                    var note = call.ResponseStream.Current;
+            //var bitask = Task.Run(async () =>
+            //{
+            //    while (await call.ResponseStream.MoveNext())
+            //    {
+            //        var note = call.ResponseStream.Current;
 
-                    WriteLine("recv " + note);
-                }
-            });
+            //        WriteLine("recv " + note);
+            //    }
+            //});
 
-            await Task.Run(async () =>
-            {
-                foreach (var name in names)
-                {
-                    await call.RequestStream.WriteAsync(
-                        new HelloRequest { Name = name });
-                    await Task.Delay(1000);
-                }
-            });
+            //await Task.Run(async () =>
+            //{
+            //    foreach (var name in names)
+            //    {
+            //        await call.RequestStream.WriteAsync(
+            //            new HelloRequest { Name = name });
+            //        await Task.Delay(1000);
+            //    }
+            //});
 
             ReadKey();
         }

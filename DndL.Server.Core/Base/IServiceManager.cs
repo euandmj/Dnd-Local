@@ -2,13 +2,13 @@
 
 namespace DndL.Server.Core.Base
 {
-    public interface IServiceManager<TSource, TData, TPacket>
+    public interface IServiceManager<TSource, TPacket>
     {
-        event Action<TData> Added;
+        event Action<TPacket> Added;
 
         static TSource Instance { get; }
 
         void Add(TPacket packet);
-        IObservable<TData> Get();
+        IObservable<TPacket> Get();
     }
 }

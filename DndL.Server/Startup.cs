@@ -1,4 +1,4 @@
-﻿using DndL.Server.ServiceManagers;
+﻿using DndL.Server.ServiceControllers;
 using DndL.Server.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

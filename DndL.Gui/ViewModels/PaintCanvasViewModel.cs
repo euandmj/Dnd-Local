@@ -1,4 +1,5 @@
 ﻿using DndL.Client.Extensions;
+using System.Linq;
 using DndL.Core.Events;
 using DndL.Gui.Commands;
 using DndL.Gui.Model;
@@ -70,32 +71,13 @@ namespace DndL.Gui.ViewModels
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
         private async void Subcribe_PointStream()
         {
             try
             {
-                var ctx = new CancellationTokenSource();
-                var call = client._client.Subscribe(new Google.Protobuf.WellKnownTypes.Empty());
-
-                await Task.Run(async () =>
+                await client.PointStream().ForEachAsync(x =>
                 {
-                    while (await call.ResponseStream.MoveNext(ctx.Token))
-                    {
-                        var curr = call.ResponseStream.Current;
-                        LineReceived?.Invoke(new DrawnLineEventArgs(curr.ToDrawnLine()));
-                    }
+                    LineReceived?.Invoke(new DrawnLineEventArgs(x.ToDrawnLine()));
                 });
             }
             catch (Exception ex)
@@ -103,6 +85,8 @@ namespace DndL.Gui.ViewModels
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
+
+
 
         public void MouseDown(object sender, MouseButtonEventArgs e)
         {

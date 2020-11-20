@@ -4,28 +4,14 @@ option csharp_namespace = "DndL.Client";
 
 package greet;
 
-// The greeting service definition.
-service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply);
-  rpc FullDuplexHello (stream HelloRequest) returns (stream HelloReply);
-}
-
-service PointService {
+service CanvasService {
   rpc SendPoint (PointPacket) returns (google.protobuf.Empty);
-  rpc Subscribe (google.protobuf.Empty) returns (stream PointPacket);
+  rpc PointSubscription(google.protobuf.Empty) returns (stream PointPacket);
 
-}
+  rpc SendClear(CanvasEventPacket) returns (google.protobuf.Empty);
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
-}
+  rpc CanvasSubcription(CanvasEventPacket) returns (google.protobuf.Empty);
 
-// The response message containing the greetings.
-message HelloReply {
-  string message = 1;
-  
 }
 
 message PointPacket {
@@ -33,6 +19,11 @@ message PointPacket {
 	repeated int32 Y = 2;
 	string StrokeBrush = 3;
 	int32 StrokeThickness = 4;
+}
+
+message CanvasEventPacket {
+	int32 EventType = 1;
+	string clientID = 2;
 }
 
 

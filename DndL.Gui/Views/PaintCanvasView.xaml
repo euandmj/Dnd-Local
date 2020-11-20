@@ -91,7 +91,7 @@
                               SelectedColor="{Binding ActiveBrush.Color, Mode=TwoWay, Converter={StaticResource BrushToColourConverter}}" />
         </StackPanel>
 
-        <Grid x:Name="gridsnapper"
+        <!--<Grid x:Name="gridsnapper"
               ShowGridLines="True"
               IsHitTestVisible="True"
               Background="Transparent"
@@ -111,7 +111,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-        </Grid>
+        </Grid>-->
 
     </Grid>
     

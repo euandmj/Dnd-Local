@@ -16,7 +16,7 @@
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                Height="800"
-                               Width="800"
+                               Width="1200"
                                Grid.Column="1"
                                Grid.Row="0"
                                IsHitTestVisible="True">
