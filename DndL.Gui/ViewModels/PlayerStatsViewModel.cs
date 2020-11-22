@@ -11,16 +11,14 @@ namespace DndL.Gui.ViewModels
 
         public PlayerStatsViewModel()
         {
+            // Todo: replace with like GetSelfCharacter
             Player = base.partyCharacters.First().Value;
         }
 
         public PlayerCharacter Player
         {
             get => character;
-            set
-            {
-                SetProperty(ref character, value);
-            }
+            set => SetProperty(ref character, value);
         }
     }
 }

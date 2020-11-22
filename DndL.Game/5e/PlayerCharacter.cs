@@ -23,12 +23,12 @@ namespace DndL.Game._5e
         public Bitmap CharImage { get; init; }
 
 
-        public Stat<float> Strength { get; } = new() { Name = nameof(Strength), Value = 10 };
-        public Stat<float> Dexterity { get; } = new() { Name = nameof(Dexterity), Value = 5 };
-        public Stat<float> Constitution { get; } = new() { Name = nameof(Constitution), Value = 10 };
-        public Stat<float> Intelligence { get; } = new() { Name = nameof(Intelligence), Value = 10 };
-        public Stat<float> Wisdom { get; } = new() { Name = nameof(Wisdom), Value = 3 };
-        public Stat<float> Charisma { get; set; } = new() { Name = nameof(Charisma), Value = 0 };
+        public Stat<float> Strength = new() { Name = nameof(Strength), Value = 10 };
+        public Stat<float> Dexterity = new() { Name = nameof(Dexterity), Value = 5 };
+        public Stat<float> Constitution = new() { Name = nameof(Constitution), Value = 10 };
+        public Stat<float> Intelligence = new() { Name = nameof(Intelligence), Value = 10 };
+        public Stat<float> Wisdom = new() { Name = nameof(Wisdom), Value = 3 };
+        public Stat<float> Charisma = new() { Name = nameof(Charisma), Value = 0 };
 
     }
 

@@ -74,10 +74,12 @@
             <Button Width="auto"
                     Height="auto"
                     Content="Brush1"
+                    IsEnabled="{Binding Brush1Enabled}"
                     Command="{Binding Brush1Command}" />
             <Button Width="auto"
                     Height="auto"
                     Content="Brush2"
+                    IsEnabled="{Binding Brush2Enabled}"
                     Command="{Binding Brush2Command}" />
 
 

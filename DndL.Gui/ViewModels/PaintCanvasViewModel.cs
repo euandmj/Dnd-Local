@@ -1,12 +1,10 @@
 ﻿using DndL.Client.Extensions;
-using System.Linq;
 using DndL.Core.Events;
 using DndL.Gui.Commands;
 using DndL.Gui.Model;
 using System;
 using System.Collections.ObjectModel;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -22,11 +20,9 @@ namespace DndL.Gui.ViewModels
         public DrawnLineEventHandler LineDrawn;
 
         private CanvasBrush activeBrush;
-        private CanvasBrush brush1 = new();
-        private CanvasBrush brush2 = new();
+        private readonly CanvasBrush brush1 = new();
+        private readonly CanvasBrush brush2 = new();
 
-        //private double strokeThickness = 1;
-        //private SolidColorBrush stroke = Brushes.Blue;
         private SolidColorBrush canvasBrush = Brushes.AntiqueWhite;
 
         private Point currentPoint;
@@ -67,8 +63,23 @@ namespace DndL.Gui.ViewModels
         public CanvasBrush ActiveBrush
         {
             get => activeBrush;
-            set => SetProperty(ref activeBrush, value);
+            set
+            {
+                SetProperty(ref activeBrush, value);
+                OnPropertyChanged(nameof(Brush1Enabled));
+                OnPropertyChanged(nameof(Brush2Enabled));
+            }
         }
+
+        public bool Brush1Enabled => activeBrush != brush1;
+        public bool Brush2Enabled => activeBrush != brush2;
+
+
+
+
+
+
+
 
 
         private async void Subcribe_PointStream()

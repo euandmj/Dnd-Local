@@ -23,7 +23,6 @@ namespace DndL.Gui.Views
     /// </summary>
     public partial class PlayerStatsControl : UserControl
     {
-        private readonly PlayerStatsViewModel viewModel;
 
         public PlayerStatsControl()
         {
@@ -31,7 +30,5 @@ namespace DndL.Gui.Views
 
             DataContext = new PlayerStatsViewModel();
         }
-    }
-
-    
+    }    
 }

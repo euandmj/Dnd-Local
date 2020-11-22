@@ -47,7 +47,7 @@ namespace DndL.Gui.ViewModels
 
         protected void OnPropertyChanged([CallerMemberName] string property = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(property)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }
