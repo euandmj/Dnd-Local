@@ -8,10 +8,10 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:lcvtr="clr-namespace:DndL.Gui.Converters"
              xmlns:model="clr-namespace:DndL.Gui.Model"
+             xmlns:views="clr-namespace:DndL.Gui.Views"
              mc:Ignorable="d" 
              VerticalAlignment="Stretch"
-             HorizontalAlignment="Stretch"
-             d:DesignHeight="450" d:DesignWidth="800">
+             HorizontalAlignment="Stretch">
     <UserControl.Resources>
         <ResourceDictionary>
             <lcvtr:BrushToColourConverter x:Key="BrushToColourConverter" />
@@ -91,9 +91,14 @@
                               SelectedColor="{Binding ActiveBrush.Color, Mode=TwoWay, Converter={StaticResource BrushToColourConverter}}" />
         </StackPanel>
 
+        <views:SnappingGrid Grid.Column="0"
+                            Grid.Row="1">
+            
+        </views:SnappingGrid>
+
         <!--<Grid x:Name="gridsnapper"
               ShowGridLines="True"
-              IsHitTestVisible="True"
+              IsHitTestVisible="False"
               Background="Transparent"
               VerticalAlignment="Stretch"
               HorizontalAlignment="Stretch"

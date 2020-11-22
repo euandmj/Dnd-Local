@@ -1,0 +1,93 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\adventurer1.bmp" />
+    <None Remove="Images\adventurer2.bmp" />
+    <None Remove="Images\adventurer3.bmp" />
+    <None Remove="Images\arcane1.bmp" />
+    <None Remove="Images\arcane2.bmp" />
+    <None Remove="Images\arcane3.bmp" />
+    <None Remove="Images\arcane4.bmp" />
+    <None Remove="Images\Champ1.bmp" />
+    <None Remove="Images\Champ2.bmp" />
+    <None Remove="Images\Champ3.bmp" />
+    <None Remove="Images\deities1.bmp" />
+    <None Remove="Images\divine1.bmp" />
+    <None Remove="Images\eberron1.bmp" />
+    <None Remove="Images\magic1.bmp" />
+    <None Remove="Images\psionic1.bmp" />
+    <None Remove="Images\psionic2.bmp" />
+    <None Remove="Images\psionic3.bmp" />
+    <None Remove="Images\psionic4.bmp" />
+    <None Remove="Images\scoundel1.bmp" />
+    <None Remove="Images\scoundel2.bmp" />
+    <None Remove="Images\scoundel3.bmp" />
+    <None Remove="Images\scoundel4.bmp" />
+    <None Remove="Images\scoundel5.bmp" />
+    <None Remove="Images\sharn1.bmp" />
+    <None Remove="Images\vile1.bmp" />
+    <None Remove="Images\vile2.bmp" />
+    <None Remove="Images\warrior1.bmp" />
+    <None Remove="Images\warrior2.bmp" />
+    <None Remove="Images\warrior3.bmp" />
+    <None Remove="Images\warrior4.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\adventurer1.bmp" />
+    <EmbeddedResource Include="Images\adventurer2.bmp" />
+    <EmbeddedResource Include="Images\adventurer3.bmp" />
+    <EmbeddedResource Include="Images\arcane1.bmp" />
+    <EmbeddedResource Include="Images\arcane2.bmp" />
+    <EmbeddedResource Include="Images\arcane3.bmp" />
+    <EmbeddedResource Include="Images\arcane4.bmp" />
+    <EmbeddedResource Include="Images\Champ1.bmp" />
+    <EmbeddedResource Include="Images\Champ2.bmp" />
+    <EmbeddedResource Include="Images\Champ3.bmp" />
+    <EmbeddedResource Include="Images\deities1.bmp" />
+    <EmbeddedResource Include="Images\divine1.bmp" />
+    <EmbeddedResource Include="Images\eberron1.bmp" />
+    <EmbeddedResource Include="Images\magic1.bmp" />
+    <EmbeddedResource Include="Images\psionic1.bmp" />
+    <EmbeddedResource Include="Images\psionic2.bmp" />
+    <EmbeddedResource Include="Images\psionic3.bmp" />
+    <EmbeddedResource Include="Images\psionic4.bmp" />
+    <EmbeddedResource Include="Images\scoundel1.bmp" />
+    <EmbeddedResource Include="Images\scoundel2.bmp" />
+    <EmbeddedResource Include="Images\scoundel3.bmp" />
+    <EmbeddedResource Include="Images\scoundel4.bmp" />
+    <EmbeddedResource Include="Images\scoundel5.bmp" />
+    <EmbeddedResource Include="Images\sharn1.bmp" />
+    <EmbeddedResource Include="Images\vile1.bmp" />
+    <EmbeddedResource Include="Images\vile2.bmp" />
+    <EmbeddedResource Include="Images\warrior1.bmp" />
+    <EmbeddedResource Include="Images\warrior2.bmp" />
+    <EmbeddedResource Include="Images\warrior3.bmp" />
+    <EmbeddedResource Include="Images\warrior4.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

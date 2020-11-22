@@ -1,4 +1,5 @@
 ﻿using DndL.Client;
+using DndL.Game._5e;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +13,15 @@ namespace DndL.Gui.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string title = string.Empty;
+
+        protected IDictionary<Guid, PlayerCharacter> partyCharacters =
+            new Dictionary<Guid, PlayerCharacter>()
+            {
+                { Guid.NewGuid(), new PlayerCharacter { CharImage = Game.Properties.Resources.adventurer1, Name = "adventurer" } },
+                { Guid.NewGuid(), new PlayerCharacter { CharImage = Game.Properties.Resources.arcane2, Name = "arcane2" } },
+                { Guid.NewGuid(), new PlayerCharacter { CharImage = Game.Properties.Resources.arcane4, Name = "arcane4" } },
+                { Guid.NewGuid(), new PlayerCharacter { CharImage = Game.Properties.Resources.warrior2, Name = "warrior" } }
+            };
         protected readonly ClientContainer client = new();
 
 

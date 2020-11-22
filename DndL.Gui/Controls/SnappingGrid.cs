@@ -2,7 +2,7 @@
 
 namespace DndL.Gui.Controls
 {
-    class SnappingGrid
+    class SnappingGridUtil
     {
         private readonly FrameworkElement Parent;
 
@@ -17,23 +17,20 @@ namespace DndL.Gui.Controls
         public double Height => Parent.Height;
 
 
-        public SnappingGrid(FrameworkElement parent)
+        public SnappingGridUtil(FrameworkElement parent)
         {
             Parent = parent;
         }
 
         public (int x, int y) GetCell(Point point)
         {
-            var relX = point.X;
-            var relY = point.Y;
-
             int row = -1, column = -1;
 
-            for (float i = 0; relX > i; i += CellWidth)
+            for (float i = 0; point.X > i; i += CellWidth)
             {
                 column++;
             }
-            for (float i = 0; relY > i; i += CellHeight)
+            for (float i = 0; point.Y > i; i += CellHeight)
             {
                 row++;
             }

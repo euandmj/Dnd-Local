@@ -11,7 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DndL.Client", "DndL.Client\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DndL.Gui", "DndL.Gui\DndL.Gui.csproj", "{53C81458-FB35-4BF8-94A1-A4C2401FB436}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DndL.Server.Core", "DndL.Server.Core\DndL.Server.Core.csproj", "{D977BF6D-8B8F-4CEB-BA71-53B2FE85CD2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DndL.Server.Core", "DndL.Server.Core\DndL.Server.Core.csproj", "{D977BF6D-8B8F-4CEB-BA71-53B2FE85CD2F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DndL.Game", "DndL.Game\DndL.Game.csproj", "{08663CC5-FCA1-4515-8868-29DD8F5B7476}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8045E744-2555-4D03-96D3-B283263AFB8E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +90,18 @@ Global
 		{D977BF6D-8B8F-4CEB-BA71-53B2FE85CD2F}.Release|x64.Build.0 = Release|Any CPU
 		{D977BF6D-8B8F-4CEB-BA71-53B2FE85CD2F}.Release|x86.ActiveCfg = Release|Any CPU
 		{D977BF6D-8B8F-4CEB-BA71-53B2FE85CD2F}.Release|x86.Build.0 = Release|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Debug|x64.Build.0 = Debug|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Debug|x86.Build.0 = Debug|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Release|x64.ActiveCfg = Release|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Release|x64.Build.0 = Release|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Release|x86.ActiveCfg = Release|Any CPU
+		{08663CC5-FCA1-4515-8868-29DD8F5B7476}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

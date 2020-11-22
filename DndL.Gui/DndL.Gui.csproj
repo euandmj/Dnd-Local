@@ -15,6 +15,11 @@
   <ItemGroup>
     <ProjectReference Include="..\DndL.Client\DndL.Client.csproj" />
     <ProjectReference Include="..\DndL.Core\DndL.Core.csproj" />
+    <ProjectReference Include="..\DndL.Game\DndL.Game.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Events\" />
   </ItemGroup>
 
 </Project>

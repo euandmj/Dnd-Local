@@ -17,7 +17,7 @@ namespace DndL.Gui.Views
     {
         private readonly PaintCanvasViewModel viewModel;
 
-        SnappingGrid sg;
+        SnappingGridUtil sg;
 
 
         public PaintCanvasView()
@@ -26,7 +26,7 @@ namespace DndL.Gui.Views
 
             DataContext = viewModel = new PaintCanvasViewModel(); 
             
-            sg = new SnappingGrid(this)
+            sg = new SnappingGridUtil(this)
             {
                 High = 4,
                 Wide = 4

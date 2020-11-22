@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+using DndL.Game._5e;
+using DndL.Gui.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,16 +19,19 @@ using System.Windows.Shapes;
 namespace DndL.Gui.Views
 {
     /// <summary>
-    /// Interaction logic for GridCellControl.xaml
+    /// Interaction logic for PlayerStatControl.xaml
     /// </summary>
-    public partial class GridCellControl : UserControl
+    public partial class PlayerStatsControl : UserControl
     {
-        public GridCellControl()
+        private readonly PlayerStatsViewModel viewModel;
+
+        public PlayerStatsControl()
         {
             InitializeComponent();
-        }
 
-        public int X { get; init; }
-        public int Y { get; init; }
+            DataContext = new PlayerStatsViewModel();
+        }
     }
+
+    
 }

@@ -32,6 +32,18 @@ namespace DndL.Gui.Views
             InitializeComponent();
 
             DataContext = viewModel = new MainWindowViewModel();
+
+
+
+
+
+
+            partyBar.PlayerSelectedEvent += (_, e) =>
+            {
+                var x = selfStats.DataContext as PlayerStatsViewModel;
+                x.Player = e.Value;
+                //otherStats.Character = e.Value;
+            };
         }
     }
 }

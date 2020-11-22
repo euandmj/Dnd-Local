@@ -1,5 +1,6 @@
 ﻿using DndL.Client;
 using DndL.Core.Events;
+using DndL.Game._5e;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,13 +10,12 @@ namespace DndL.Gui.ViewModels
 {
     class MainWindowViewModel
         : BaseViewModel
-    {      
+    {
 
         public MainWindowViewModel()
-        {
+        {            
 
-
-            
         }
+
     }
 }
