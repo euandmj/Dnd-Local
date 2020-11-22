@@ -41,9 +41,22 @@
                                   HorizontalAlignment="Stretch"
                                   Grid.Column="0"
                                   Grid.Row="1"
-                                  Grid.RowSpan="2">
+                                  Grid.RowSpan="3">
             
         </views:PlayerStatsView>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2"
+                    Grid.Column="1">
+            <!-- Self Stats -->          
+            
+            
+            <!-- Self Skills -->
+            <views:PlayerSpellsView Width="auto"
+                                    Height="auto">
+
+            </views:PlayerSpellsView>
+        </StackPanel>
         
         
         

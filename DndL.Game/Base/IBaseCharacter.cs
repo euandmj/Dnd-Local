@@ -2,11 +2,9 @@
 
 namespace DndL.Game.Base
 {
-    public interface IBaseCharacter<TStat>
+    public interface IBaseCharacter
     {
         string Name { get; set; }
-
-        Stat<TStat>[] KeyStats { get; }
         Bitmap CharImage { get; init; }
 
     }
