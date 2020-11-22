@@ -1,12 +1,7 @@
-﻿using DndL.Core.Events;
-using DndL.Gui.Controls;
+﻿using DndL.Gui.Utility;
 using DndL.Gui.ViewModels;
-using System;
-using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Shapes;
 
 namespace DndL.Gui.Views
 {

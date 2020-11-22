@@ -22,13 +22,13 @@ namespace DndL.Gui.Views
     /// <summary>
     /// Interaction logic for PartyBarControl.xaml
     /// </summary>
-    public partial class PartyBarControl : UserControl
+    public partial class PartyBarView : UserControl
     {
         public event EventHandler<GenericEventArgs<PlayerCharacter>> PlayerSelectedEvent;
 
         private readonly PartyBarViewModel viewModel;
 
-        public PartyBarControl()
+        public PartyBarView()
         {
             InitializeComponent();
 

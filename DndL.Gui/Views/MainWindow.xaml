@@ -34,7 +34,7 @@
         </views:PaintCanvasView>
 
 
-        <views:PlayerStatsControl x:Name="selfStats"
+        <views:PlayerStatsView x:Name="selfStats"
                                   VerticalAlignment="Stretch"
                                   BorderBrush="Red"
                                   BorderThickness="3"
@@ -43,16 +43,19 @@
                                   Grid.Row="1"
                                   Grid.RowSpan="2">
             
-        </views:PlayerStatsControl>
+        </views:PlayerStatsView>
+        
+        
+        
 
 
-        <views:PartyBarControl x:Name="partyBar"
+        <views:PartyBarView x:Name="partyBar"
                                VerticalAlignment="Stretch"
                                HorizontalAlignment="Center"
                                Grid.Column="1"
                                Grid.Row="3">
             
-        </views:PartyBarControl>
+        </views:PartyBarView>
 
         <!--<views:PlayerStatsControl x:Name="otherStats"
                                   VerticalAlignment="Stretch"

@@ -21,10 +21,10 @@ namespace DndL.Gui.Views
     /// <summary>
     /// Interaction logic for PlayerStatControl.xaml
     /// </summary>
-    public partial class PlayerStatsControl : UserControl
+    public partial class PlayerStatsView : UserControl
     {
 
-        public PlayerStatsControl()
+        public PlayerStatsView()
         {
             InitializeComponent();
 

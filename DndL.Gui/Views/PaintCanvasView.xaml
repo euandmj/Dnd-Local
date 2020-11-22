@@ -7,6 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:lcvtr="clr-namespace:DndL.Gui.Converters"
+             xmlns:controls="clr-namespace:DndL.Gui.Controls"
              xmlns:model="clr-namespace:DndL.Gui.Model"
              xmlns:views="clr-namespace:DndL.Gui.Views"
              mc:Ignorable="d" 
@@ -17,9 +18,7 @@
             <lcvtr:BrushToColourConverter x:Key="BrushToColourConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
-    
-    
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -47,19 +46,16 @@
             <ity:Interaction.Triggers>
                 <ity:EventTrigger EventName="MouseLeftButtonDown">
                     <its:CallMethodAction TargetObject="{Binding}"
-                                         MethodName="MouseDown" />
+                                          MethodName="MouseDown" />
                 </ity:EventTrigger>
                 <ity:EventTrigger EventName="MouseMove">
                     <its:CallMethodAction TargetObject="{Binding}"
-                                         MethodName="MouseMove" />
+                                          MethodName="MouseMove" />
                 </ity:EventTrigger>
                 <ity:EventTrigger EventName="MouseLeftButtonUp">
                     <ity:InvokeCommandAction Command="{Binding MouseUpCommand}" />
                 </ity:EventTrigger>
             </ity:Interaction.Triggers>
-            
-            
-
         </Canvas>
         
         <StackPanel Orientation="Horizontal"
@@ -93,10 +89,10 @@
                               SelectedColor="{Binding ActiveBrush.Color, Mode=TwoWay, Converter={StaticResource BrushToColourConverter}}" />
         </StackPanel>
 
-        <views:SnappingGrid Grid.Column="0"
+        <controls:SnappingGrid Grid.Column="0"
                             Grid.Row="1">
             
-        </views:SnappingGrid>
+        </controls:SnappingGrid>
 
         <!--<Grid x:Name="gridsnapper"
               ShowGridLines="True"

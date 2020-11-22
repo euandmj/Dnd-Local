@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace DndL.Gui.Controls
+namespace DndL.Gui.Utility
 {
     class SnappingGridUtil
     {

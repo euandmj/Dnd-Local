@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DndL.Gui.Views
+namespace DndL.Gui.Controls
 {
     /// <summary>
     /// Interaction logic for SnappingGrid.xaml
