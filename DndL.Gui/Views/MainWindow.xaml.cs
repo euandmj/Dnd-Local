@@ -32,12 +32,5 @@ namespace DndL.Gui.Views
 
             };
         }
-
-        private IDie<Game._5e.FiveDie> die = new BaseDie<Game._5e.FiveDie>();
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-            lblFoo.Content = die.Roll().ToString();
-        }
     }
 }
