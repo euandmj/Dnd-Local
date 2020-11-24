@@ -2,6 +2,9 @@
 using DndL.Game.Dice;
 using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DndL.Gui.Views
 {
@@ -18,7 +21,7 @@ namespace DndL.Gui.Views
 
             DataContext = viewModel = new MainWindowViewModel();
 
-
+            
 
 
 
@@ -31,6 +34,22 @@ namespace DndL.Gui.Views
                 otherStats.DataContext = new EntityDescriptionViewModel(e.Value);
 
             };
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // USE THIS METHOD AS A TEMPLATE FOR HOT SWAPPING UI
+            var x = new TestView();
+
+            x.Sync += (_, _) =>
+            {
+
+            };
+
+            Grid.SetRow(x, 0);
+            Grid.SetColumn(x, 0);
+
+            grid.Children.Add(x);
         }
     }
 }

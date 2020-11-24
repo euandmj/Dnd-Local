@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DndL.Gui.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,9 +34,26 @@ namespace DndL.Gui.Views
     {
 
 
+        public SelfStatsViewModel()
+        {
 
 
 
+            TextChangedCommand = new Command((x) =>
+            {
+
+            });
+        }
+
+       
+
+        public ICommand TextChangedCommand { get; }
+
+
+        public void MouseMove(object sender, TextChangedEventArgs e)
+        {
+
+        }
 
     }
 }

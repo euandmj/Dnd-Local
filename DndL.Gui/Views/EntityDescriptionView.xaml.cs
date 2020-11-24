@@ -31,9 +31,7 @@ namespace DndL.Gui.Views
                 {
                     Name = "bob jovine",
                     CharImage = Game.Properties.Resources.psionic3,
-                    DescriptionShort = "Tonight I'll probably be playing games to tide over time but I have some training for work I need to do so staying late",
-                    Health = 25,
-                    Armor = 15
+                    DescriptionShort = "Tonight I'll probably be playing games to tide over time but I have some training for work I need to do so staying late"
                 });
         }
 

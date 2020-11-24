@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:DndL.Gui"
         xmlns:model="clr-namespace:DndL.Gui.Model"
         xmlns:views="clr-namespace:DndL.Gui.Views"
+        Loaded="Window_Loaded"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="1050"

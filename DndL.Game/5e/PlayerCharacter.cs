@@ -1,4 +1,5 @@
-﻿using DndL.Game.Base;
+﻿using DndL.Core;
+using DndL.Game.Base;
 using System;
 using System.Collections.ObjectModel;
 using System.Drawing;
@@ -6,52 +7,54 @@ using System.Drawing;
 namespace DndL.Game._5e
 {
     public class PlayerCharacter
-        : IBaseCharacter
+        : NotifyPropertyChanged, IBaseCharacter
     {
         public Guid ID { get; init; } = new Guid();
         public string Name { get; set; }
         public Bitmap CharImage { get; init; }
-        public IStat<int>[] KeyStats
+
+        public ObservableCollection<Stat> MajorStats
         {
-            get => new Stat[]
+            get => new ObservableCollection<Stat>()
             {
-                Strength,
-                Dexterity,
-                Dexterity,
-                Constitution,
-                Intelligence,
-                Wisdom,
-                Charisma
+                new Stat { Name = "Strength" },
+                new Stat { Name = "Dexterity" },
+                new Stat { Name = "Constitution" },
+                new Stat { Name = "Intelligence" },
+                new Stat { Name = "Wisdom" },
+                new Stat { Name = "Charisma" },
             };
         }
-        public IStat<int>[] MinorStats
+        public ObservableCollection<Stat> MinorStats
         {
-            get => new Stat[]
+            get => new ObservableCollection<Stat>()
             {
-                Acrobatics,
-                AnimalHandling,
-                Arcana ,
-                Athletics,
-                Deception,
-                History ,
-                Insight ,
-                Intimidation,
-                Investigation,
-                Medicine,
-                Nature ,
-                Perception,
-                Performance,
-                Persuasion,
-                Religion,
-                SleightOfHand,
-                Stealth ,
-                Survival
+                new Stat() { Name = "Acrobatics" },
+                new Stat() { Name = "AnimalHandling" },
+                new Stat() { Name = "Arcana" },
+                new Stat() { Name = "Athletics" },
+                new Stat() { Name = "Deception" },
+                new Stat() { Name = "Acrobatics" },
+                new Stat() { Name = "History" },
+                new Stat() { Name = "Insight" },
+                new Stat() { Name = "Intimidation" },
+                new Stat() { Name = "Investigation" },
+                new Stat() { Name = "Medicine" },
+                new Stat() { Name = "Nature" },
+                new Stat() { Name = "Perception" },
+                new Stat() { Name = "Performance" },
+                new Stat() { Name = "Persuasion" },
+                new Stat() { Name = "Religion" },
+                new Stat() { Name = "SleightOfHand" },
+                new Stat() { Name = "Stealth" },
+                new Stat() { Name = "Survival" },
             };
         }
 
         public ObservableCollection<AttackSpell> AttacksSpells { get; set; }
 
-        public int ArmorClass { get; set; }
+        private int _armorClass;
+        public int ArmorClass { get => _armorClass; set => SetProperty(ref _armorClass, value); }
         public int Initiative { get; set; }
         public int Speed { get; set; }
         public int MaxHP { get; set; }
@@ -59,34 +62,5 @@ namespace DndL.Game._5e
         public float TemporaryHP { get; set; }
         public int TotalHitDice { get; set; }
         public int CurrentHitDice { get; set; }
-
-
-        public Stat Strength = new() { Name = nameof(Strength) };
-        public Stat Dexterity = new() { Name = nameof(Dexterity) };
-        public Stat Constitution = new() { Name = nameof(Constitution) };
-        public Stat Intelligence = new() { Name = nameof(Intelligence) };
-        public Stat Wisdom = new() { Name = nameof(Wisdom) };
-        public Stat Charisma = new() { Name = nameof(Charisma) };
-
-        public Stat Acrobatics = new() { Name = nameof(Acrobatics) };
-        public Stat AnimalHandling = new() { Name = nameof(AnimalHandling) };
-        public Stat Arcana = new() { Name = nameof(Arcana) };
-        public Stat Athletics = new() { Name = nameof(Athletics) };
-        public Stat Deception = new() { Name = nameof(Deception) };
-        public Stat History = new() { Name = nameof(History) };
-        public Stat Insight = new() { Name = nameof(Insight) };
-        public Stat Intimidation = new() { Name = nameof(Intimidation) };
-        public Stat Investigation = new() { Name = nameof(Investigation) };
-        public Stat Medicine = new() { Name = nameof(Medicine) };
-        public Stat Nature = new() { Name = nameof(Nature) };
-        public Stat Perception = new() { Name = nameof(Perception) };
-        public Stat Performance = new() { Name = nameof(Performance) };
-        public Stat Persuasion = new() { Name = nameof(Persuasion) };
-        public Stat Religion = new() { Name = nameof(Religion) };
-        public Stat SleightOfHand = new() { Name = nameof(SleightOfHand) };
-        public Stat Stealth = new() { Name = nameof(Stealth) };
-        public Stat Survival = new() { Name = nameof(Survival) };
-
-
     }
 }

@@ -12,6 +12,12 @@
         <ResourceDictionary>
             <conv:BitmapToImageConverter x:Key="bmpconv" />
             <conv:ProficientFillConverter x:Key="profconv" />
+            <Style TargetType="TextBox">
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Margin"
+                        Value="0 5 0 0" />
+            </Style>                   
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -21,7 +27,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
 
@@ -37,14 +43,17 @@
                Height="175"
                Grid.Row="1" />
 
-        <ListView ItemsSource="{Binding Player.KeyStats}"
+        <ListView ItemsSource="{Binding Player.MajorStats}"
+                  HorizontalAlignment="Center"
+                  BorderThickness="0"
+                  Margin="0 0 0 20"
                   Grid.Row="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
                         <Label Content="{Binding Name}"
                                HorizontalAlignment="Left" />
-                        <Label Content="{Binding Value}"
+                        <TextBox Text="{Binding Value, Mode=TwoWay}"
                                HorizontalAlignment="Right" />
                     </WrapPanel>
                 </DataTemplate>
@@ -52,6 +61,8 @@
         </ListView>
 
         <ListView ItemsSource="{Binding Player.MinorStats}"
+                  BorderThickness="0"
+                  HorizontalAlignment="Center"
                   Grid.Row="3">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -63,7 +74,7 @@
                                      Fill="{Binding Proficient, Converter={StaticResource profconv}}" />
                             <Label Content="{Binding Name}"
                                    HorizontalAlignment="Left" />
-                            <Label Content="{Binding Value}"
+                            <TextBox Text="{Binding Value, Mode=TwoWay}"
                                    HorizontalAlignment="Right" />
                         </StackPanel>
                     </WrapPanel>

@@ -76,6 +76,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DndL.Core\DndL.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
