@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace DndL.Game.Dice
 {
-    public interface IDie<TValues>
-        : IEnumerable<TValues>
-        where TValues : Enum
+    public interface IDie<TDieEnum>
+        : IEnumerable<TDieEnum>
+        where TDieEnum : Enum
     {
-        TValues Roll();
+        TDieEnum Roll();
     }
 }

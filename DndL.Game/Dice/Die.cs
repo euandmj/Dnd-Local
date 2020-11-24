@@ -4,29 +4,29 @@ using System.Collections.Generic;
 
 namespace DndL.Game.Dice
 {
-    public class BaseDie<TValues>
-        : IDie<TValues>, IEnumerable<TValues>
-        where TValues : Enum
+    public class BaseDie<TDieEnum>
+        : IDie<TDieEnum>
+        where TDieEnum : Enum
     {
-        protected readonly ICollection<TValues> Values = (ICollection<TValues>)Enum.GetValues(typeof(TValues));
-        protected readonly int limit = Enum.GetValues(typeof(TValues)).Length;
+        protected readonly ICollection<TDieEnum> Values = (ICollection<TDieEnum>)Enum.GetValues(typeof(TDieEnum));
+        protected readonly int limit = Enum.GetValues(typeof(TDieEnum)).Length;
         protected readonly Random rand = new Random();
 
         public BaseDie(int seed) => rand = new Random(seed);
         public BaseDie() { }
 
-        public TValues Roll()
+        public TDieEnum Roll()
         {
             var randInt = rand.Next(0, limit);
 
-            if (!Enum.TryParse(typeof(TValues), randInt.ToString(), out var enu))
+            if (!Enum.TryParse(typeof(TDieEnum), randInt.ToString(), out var enu))
             {
                 throw new InvalidProgramException("the random int should be convertable to TValue. Is Die value enum int?");
             }
-            return (TValues)enu;
+            return (TDieEnum)enu;
         }
 
-        public IEnumerator<TValues> GetEnumerator()
+        public IEnumerator<TDieEnum> GetEnumerator()
         {
             return this.Values.GetEnumerator();
         }
