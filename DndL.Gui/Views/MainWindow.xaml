@@ -56,19 +56,25 @@
             
         </views:EntityDescriptionView>
 
-        <DockPanel LastChildFill="True"
-                    Grid.Row="2"
-                    Grid.Column="1">
+        <Grid FlowDirection="LeftToRight"
+              HorizontalAlignment="Stretch"
+              Grid.Row="2"
+              Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
             <!-- Self Stats -->          
             
             
             <!-- Self Skills -->
-            <views:PlayerSpellsView HorizontalContentAlignment="Stretch"
+            <views:PlayerSpellsView Grid.Column="1"
                                     Height="auto"
+                                    HorizontalContentAlignment="Stretch"
                                     HorizontalAlignment="Stretch">
 
             </views:PlayerSpellsView>
-        </DockPanel>
+        </Grid>
 
 
         <views:DiceView Grid.Row="2"

@@ -35,10 +35,10 @@ namespace DndL.Gui.Views
 
         public PlayerSpellsViewModel()
         {
-            //Player.AttacksSpells = new()
-            //{
-            //    new Game._5e.AttackSpell { DamageType = "dmgtype", Name = "spell1", Value = 5f }
-            //};
+            Player.AttacksSpells = new()
+            {
+                new Game._5e.AttackSpell { DamageType = "dmgtype", Name = "spell1", Value = 5f }
+            };
         }
     }
 }
