@@ -51,12 +51,15 @@ namespace DndL.Game._5e
 
         public ObservableCollection<AttackSpell> AttacksSpells { get; set; }
 
-        public int ArmorClass;
-        public int Initiative;
-        public int Speed;
-        public int MaxHP;
-        public float CurrentHP;
-        public float TemporaryHP;
+        public int ArmorClass { get; set; }
+        public int Initiative { get; set; }
+        public int Speed { get; set; }
+        public int MaxHP { get; set; }
+        public float CurrentHP { get; set; }
+        public float TemporaryHP { get; set; }
+        public int TotalHitDice { get; set; }
+        public int CurrentHitDice { get; set; }
+
 
         public Stat Strength = new() { Name = nameof(Strength) };
         public Stat Dexterity = new() { Name = nameof(Dexterity) };

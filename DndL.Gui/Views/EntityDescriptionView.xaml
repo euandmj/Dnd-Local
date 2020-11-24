@@ -40,7 +40,9 @@
                Grid.Row="1" />
 
         <TextBlock Text="{Binding Character.DescriptionShort}"
-                    TextWrapping="WrapWithOverflow"
+                   TextWrapping="WrapWithOverflow"
+                   TextAlignment="Center"
+                   Margin="5"
                    Grid.Row="2" />
 
         <StackPanel Orientation="Horizontal"

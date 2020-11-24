@@ -27,6 +27,7 @@
                 <DataTemplate>
                     <DockPanel>
                         <Image Source="{Binding CharImage, Converter={StaticResource bmpConv}}"
+                               ToolTip="{Binding Name}"
                                Margin="10 0 0 0" />
                         
                         <ity:Interaction.Triggers>

@@ -22,7 +22,6 @@
         </Grid.RowDefinitions>
 
         <ComboBox ItemsSource="{Binding DiceOptions}"
-                  DisplayMemberPath="{Binding Name}"
                   x:Name="comboDice"
                   Grid.Row="0">
             <ity:Interaction.Triggers>
