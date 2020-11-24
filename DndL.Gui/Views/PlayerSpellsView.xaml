@@ -2,25 +2,26 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:DndL.Gui.Views"
+             xmlns:conv="clr-namespace:DndL.Gui.Converters"
+             HorizontalAlignment="Stretch"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
 
-        <ListView ItemsSource="{Binding Player.AttacksSpells}"
+        <DataGrid ItemsSource="{Binding Player.AttacksSpells}"
                   HorizontalAlignment="Stretch"
                   Grid.Row="2">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel>
-                        <Label Content="{Binding Name}" />
-                        <Label Content="{Binding Value}" />
-                        <Label Content="{Binding DamageType}" />
-                    </WrapPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <DataGrid>
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding Name}" />
+                <DataGridTextColumn Header="ATK Bonus"
+                                    Binding="{Binding Value}" />
+                <DataGridTextColumn Header="Damage Type"
+                                    Binding="{Binding DamageType}" />
+            </DataGrid>
+        </DataGrid>
     </Grid>
 </UserControl>

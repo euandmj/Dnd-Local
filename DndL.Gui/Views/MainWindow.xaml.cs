@@ -1,4 +1,6 @@
 ﻿using DndL.Gui.ViewModels;
+using DndL.Game.Dice;
+using System;
 using System.Windows;
 
 namespace DndL.Gui.Views
@@ -23,10 +25,19 @@ namespace DndL.Gui.Views
 
             partyBar.PlayerSelectedEvent += (_, e) =>
             {
+                if (otherStats.DataContext.GetType() != typeof(EntityDescriptionViewModel))
+                    throw new InvalidProgramException("expects view model");
 
-
+                otherStats.DataContext = new EntityDescriptionViewModel(e.Value);
 
             };
+        }
+
+        private IDie<Game._5e.FiveDie> die = new BaseDie<Game._5e.FiveDie>();
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+            lblFoo.Content = die.Roll().ToString();
         }
     }
 }

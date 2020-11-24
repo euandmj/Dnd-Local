@@ -24,7 +24,7 @@ namespace DndL.Gui.Views
     /// </summary>
     public partial class PartyBarView : UserControl
     {
-        public event EventHandler<GenericEventArgs<PlayerCharacter>> PlayerSelectedEvent;
+        public event EventHandler<GenericEventArgs<NPlayerCharacter>> PlayerSelectedEvent;
 
         private readonly PartyBarViewModel viewModel;
 
@@ -44,7 +44,7 @@ namespace DndL.Gui.Views
     class PartyBarViewModel
         : BaseViewModel
     {
-        public event EventHandler<GenericEventArgs<PlayerCharacter>> PlayerSelectedEvent;
+        public event EventHandler<GenericEventArgs<NPlayerCharacter>> PlayerSelectedEvent;
 
         public PartyBarViewModel()
         {
@@ -53,11 +53,11 @@ namespace DndL.Gui.Views
 
             MouseLeftButtonDownCommand = new Command(x =>
             {
-                PlayerSelectedEvent?.Invoke(this, new GenericEventArgs<PlayerCharacter>((PlayerCharacter)x));
+                PlayerSelectedEvent?.Invoke(this, new GenericEventArgs<NPlayerCharacter>((NPlayerCharacter)x));
             });
         }
 
-        public List<PlayerCharacter> Characters { get; init; }
+        public List<NPlayerCharacter> Characters { get; init; }
         public ICommand MouseLeftButtonDownCommand { get; }
     }
 }

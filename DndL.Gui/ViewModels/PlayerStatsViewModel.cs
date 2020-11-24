@@ -5,5 +5,7 @@ namespace DndL.Gui.ViewModels
     class PlayerStatsViewModel
         : BaseViewModel
     {
+
+
     }
 }

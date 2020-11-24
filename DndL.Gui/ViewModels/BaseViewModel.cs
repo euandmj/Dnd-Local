@@ -14,23 +14,20 @@ namespace DndL.Gui.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string title = string.Empty;
-        private PlayerCharacter character;
         protected readonly ClientContainer client = new();
 
-        protected IDictionary<Guid, PlayerCharacter> partyCharacters =
-           new Dictionary<Guid, PlayerCharacter>()
+        // Todo: replace with like GetSelfCharacter
+        protected PlayerCharacter selfPlayer =
+            new PlayerCharacter { CharImage = Game.Properties.Resources.adventurer1, Name = "adventurer" };
+        protected IDictionary<Guid, NPlayerCharacter> partyCharacters =
+           new Dictionary<Guid, NPlayerCharacter>()
            {
-                { Guid.NewGuid(), new PlayerCharacter { CharImage = Game.Properties.Resources.adventurer1, Name = "adventurer", AttacksSpells = new() { new AttackSpell { DamageType = "dmgtype", Name = "spell1", Value = 5f } } } },
-                { Guid.NewGuid(), new PlayerCharacter { CharImage = Game.Properties.Resources.arcane2, Name = "arcane2" } },
-                { Guid.NewGuid(), new PlayerCharacter { CharImage = Game.Properties.Resources.arcane4, Name = "arcane4" } },
-                { Guid.NewGuid(), new PlayerCharacter { CharImage = Game.Properties.Resources.warrior2, Name = "warrior" } }
+                { Guid.NewGuid(), new NPlayerCharacter { CharImage = Game.Properties.Resources.adventurer1, Name = "adventurer" } },
+                { Guid.NewGuid(), new NPlayerCharacter { CharImage = Game.Properties.Resources.arcane2, Name = "arcane2" } },
+                { Guid.NewGuid(), new NPlayerCharacter { CharImage = Game.Properties.Resources.arcane4, Name = "arcane4" } },
+                { Guid.NewGuid(), new NPlayerCharacter { CharImage = Game.Properties.Resources.warrior2, Name = "warrior" } }
            };
 
-        public BaseViewModel()
-        {
-            // Todo: replace with like GetSelfCharacter
-            Player = partyCharacters.First().Value;
-        }
 
         public string Title
         {
@@ -40,8 +37,8 @@ namespace DndL.Gui.ViewModels
 
         public PlayerCharacter Player
         {
-            get => character;
-            set => SetProperty(ref character, value);
+            get => selfPlayer;
+            set => SetProperty(ref selfPlayer, value);
         }
 
         protected void SetProperty<T>(

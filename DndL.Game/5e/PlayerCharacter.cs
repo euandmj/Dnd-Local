@@ -1,4 +1,5 @@
 ﻿using DndL.Game.Base;
+using System;
 using System.Collections.ObjectModel;
 using System.Drawing;
 
@@ -7,6 +8,7 @@ namespace DndL.Game._5e
     public class PlayerCharacter
         : IBaseCharacter
     {
+        public Guid ID { get; init; } = new Guid();
         public string Name { get; set; }
         public Bitmap CharImage { get; init; }
         public IStat<int>[] KeyStats

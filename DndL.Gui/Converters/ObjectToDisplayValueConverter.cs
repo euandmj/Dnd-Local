@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Drawing;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Media.Imaging;
 
 namespace DndL.Gui.Converters
 {
-    class BitmapToImageConverter
+    class ObjectToDisplayValueConverter
         : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is not Bitmap bmp) return null;
-
-            return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
-                bmp.GetHbitmap(),
-                IntPtr.Zero,
-                System.Windows.Int32Rect.Empty,
-                BitmapSizeOptions.FromWidthAndHeight(bmp.Width, bmp.Height));
-
+            //var attr = value.GetType().GetCustomAttributes(typeof(DisplayNameAttribute), false);
+            throw new NotImplementedException();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

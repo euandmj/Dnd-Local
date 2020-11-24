@@ -32,5 +32,13 @@ namespace DndL.Gui.Views
         : ViewModels.BaseViewModel
     {
 
+
+        public PlayerSpellsViewModel()
+        {
+            //Player.AttacksSpells = new()
+            //{
+            //    new Game._5e.AttackSpell { DamageType = "dmgtype", Name = "spell1", Value = 5f }
+            //};
+        }
     }
 }
