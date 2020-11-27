@@ -1,10 +1,7 @@
-﻿using DndL.Gui.ViewModels;
-using DndL.Game.Dice;
-using System;
+﻿using DndL.Game.Views.Views;
+using DndL.Gui.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace DndL.Gui.Views
 {
@@ -39,17 +36,30 @@ namespace DndL.Gui.Views
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // USE THIS METHOD AS A TEMPLATE FOR HOT SWAPPING UI
-            var x = new TestView();
-
-            x.Sync += (_, _) =>
+            if (true)
             {
+                var playerStats = new PlayerStatsView();
+                Grid.SetRow(playerStats, 1);
+                Grid.SetColumn(playerStats, 0);
+                Grid.SetRowSpan(playerStats, 3);
 
-            };
+                var entityDesc = new EntityDescriptionView();
+                Grid.SetRow(entityDesc, 1);
+                Grid.SetColumn(entityDesc, 2);
 
-            Grid.SetRow(x, 0);
-            Grid.SetColumn(x, 0);
+                var selfStats = new SelfStatsView();
+                Grid.SetColumn(selfStats, 0);
 
-            grid.Children.Add(x);
+                var selfSkills = new PlayerSpellsView();
+                Grid.SetColumn(selfSkills, 1);
+
+                grid.Children.Add(playerStats);
+                grid.Children.Add(entityDesc);
+                selfGrid.Children.Add(selfStats);
+                selfGrid.Children.Add(selfSkills);
+
+            }
+
         }
     }
 }

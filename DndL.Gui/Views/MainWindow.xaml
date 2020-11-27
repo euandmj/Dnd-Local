@@ -59,7 +59,8 @@
         <Grid FlowDirection="LeftToRight"
               HorizontalAlignment="Stretch"
               Grid.Row="2"
-              Grid.Column="1">
+              Grid.Column="1"
+              x:Name="selfGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="0.5*" />
