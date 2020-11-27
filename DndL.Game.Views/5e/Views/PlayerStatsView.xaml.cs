@@ -1,6 +1,7 @@
 ﻿
 using DndL.Game._5e;
 using DndL.Game.Views.ViewModels;
+using DndL.Gui.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,13 @@ namespace DndL.Game.Views.Views
     /// <summary>
     /// Interaction logic for PlayerStatControl.xaml
     /// </summary>
-    public partial class PlayerStatsView : UserControl
+    public partial class PlayerStatsView 
+        : UserControl, IRuntimeControl
     {
+        public int Column { get; } = 1;
+        public int Row { get; }
+        public int? ColumnSpan { get; }
+        public int? RowSpan { get; }
 
         public PlayerStatsView()
         {

@@ -1,11 +1,9 @@
 ﻿using DndL.Core.Events;
-using DndL.Game._5e;
 using DndL.Game.Base;
 using DndL.Gui.Core.Commands;
 using DndL.Gui.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -16,7 +14,7 @@ namespace DndL.Gui.Views
     /// </summary>
     public partial class PartyBarView : UserControl
     {
-        public event EventHandler<GenericEventArgs<NPlayerCharacter>> PlayerSelectedEvent;
+        public event EventHandler<GenericEventArgs<IBaseCharacter>> PlayerSelectedEvent;
 
         private readonly PartyBarViewModel viewModel;
 
@@ -36,20 +34,20 @@ namespace DndL.Gui.Views
     class PartyBarViewModel
         : BaseViewModel
     {
-        public event EventHandler<GenericEventArgs<NPlayerCharacter>> PlayerSelectedEvent;
+        public event EventHandler<GenericEventArgs<IBaseCharacter>> PlayerSelectedEvent;
 
         public PartyBarViewModel()
         {
-            Characters = base.partyCharacters.Values;
+            Characters = DndL.Game.Base.GameContainer.GetGame().Party.Values;
 
 
             MouseLeftButtonDownCommand = new Command(x =>
             {
-                PlayerSelectedEvent?.Invoke(this, new GenericEventArgs<NPlayerCharacter>((NPlayerCharacter)x));
+                PlayerSelectedEvent?.Invoke(this, new GenericEventArgs<IBaseCharacter>((IBaseCharacter)x));
             });
         }
 
-        public ICollection<NPlayerCharacter> Characters { get; init; }
+        public ICollection<IBaseCharacter> Characters { get; init; }
         public ICommand MouseLeftButtonDownCommand { get; }
     }
 }

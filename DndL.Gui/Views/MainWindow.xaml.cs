@@ -18,10 +18,6 @@ namespace DndL.Gui.Views
 
             DataContext = viewModel = new MainWindowViewModel();
 
-            
-
-
-
 
             partyBar.PlayerSelectedEvent += (_, e) =>
             {
@@ -52,7 +48,7 @@ namespace DndL.Gui.Views
 
                 var selfSkills = new PlayerSpellsView();
                 Grid.SetColumn(selfSkills, 1);
-
+                
                 grid.Children.Add(playerStats);
                 grid.Children.Add(entityDesc);
                 selfGrid.Children.Add(selfStats);
