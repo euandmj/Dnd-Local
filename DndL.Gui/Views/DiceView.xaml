@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:its="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:ity="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:conv="clr-namespace:DndL.Gui.Converters"
+             xmlns:conv="clr-namespace:DndL.Gui.Core.Converters;assembly=DndL.Gui.Core"
              xmlns:local="clr-namespace:DndL.Gui.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">

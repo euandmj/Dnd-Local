@@ -1,6 +1,6 @@
 ﻿using DndL.Client.Extensions;
 using DndL.Core.Events;
-using DndL.Gui.Commands;
+using DndL.Gui.Core.Commands;
 using DndL.Gui.Model;
 using System;
 using System.Collections.ObjectModel;

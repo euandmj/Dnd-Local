@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace DndL.Gui.ViewModels
 {
     abstract class BaseViewModel
-        : Core.NotifyPropertyChanged
+        : DndL.Core.NotifyPropertyChanged
     {
 
         private string title = string.Empty;

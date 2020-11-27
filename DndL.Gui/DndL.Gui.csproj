@@ -7,6 +7,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Commands\**" />
+    <Compile Remove="Converters\**" />
+    <EmbeddedResource Remove="Commands\**" />
+    <EmbeddedResource Remove="Converters\**" />
+    <None Remove="Commands\**" />
+    <None Remove="Converters\**" />
+    <Page Remove="Commands\**" />
+    <Page Remove="Converters\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ViewModels\PlayerStatsViewModel.cs" />
+    <Compile Remove="Views\EntityDescriptionView.xaml.cs" />
+    <Compile Remove="Views\PlayerSpellsView.xaml.cs" />
+    <Compile Remove="Views\PlayerStatsView.xaml.cs" />
+    <Compile Remove="Views\SelfStatsView.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Views\EntityDescriptionView.xaml" />
+    <Page Remove="Views\PlayerSpellsView.xaml" />
+    <Page Remove="Views\PlayerStatsView.xaml" />
+    <Page Remove="Views\SelfStatsView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.1" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
@@ -15,7 +41,9 @@
   <ItemGroup>
     <ProjectReference Include="..\DndL.Client\DndL.Client.csproj" />
     <ProjectReference Include="..\DndL.Core\DndL.Core.csproj" />
+    <ProjectReference Include="..\DndL.Game.Views\DndL.Game.Views.csproj" />
     <ProjectReference Include="..\DndL.Game\DndL.Game.csproj" />
+    <ProjectReference Include="..\DndL.Gui.Core\DndL.Gui.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

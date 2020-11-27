@@ -37,7 +37,7 @@
         
         <!--Row 1-->
         
-        <views:PlayerStatsView x:Name="selfStats"
+        <!--<views:PlayerStatsView x:Name="selfStats"
                                   VerticalAlignment="Stretch"
                                   HorizontalAlignment="Stretch"
                                   Grid.Column="0"
@@ -52,7 +52,7 @@
                                      Grid.Column="2"
                                      Grid.Row="1">
             
-        </views:EntityDescriptionView>
+        </views:EntityDescriptionView>-->
         
         <!--Row 2-->
         
@@ -65,19 +65,19 @@
                 <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
             <!-- Self Stats -->
-            <views:SelfStatsView Grid.Column="0"
+            <!--<views:SelfStatsView Grid.Column="0"
                                  Height="auto"
                                  HorizontalContentAlignment="Stretch"
                                  HorizontalAlignment="Stretch">
             </views:SelfStatsView>
 
-            <!-- Self Skills -->
+            --><!-- Self Skills --><!--
             <views:PlayerSpellsView Grid.Column="1"
                                     Height="auto"
                                     HorizontalContentAlignment="Stretch"
                                     HorizontalAlignment="Stretch">
 
-            </views:PlayerSpellsView>
+            </views:PlayerSpellsView>-->
         </Grid>
 
 

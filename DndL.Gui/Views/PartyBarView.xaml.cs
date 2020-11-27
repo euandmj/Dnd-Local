@@ -1,7 +1,7 @@
 ﻿using DndL.Core.Events;
 using DndL.Game._5e;
 using DndL.Game.Base;
-using DndL.Gui.Commands;
+using DndL.Gui.Core.Commands;
 using DndL.Gui.ViewModels;
 using System;
 using System.Collections.Generic;

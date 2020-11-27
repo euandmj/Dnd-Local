@@ -28,10 +28,10 @@ namespace DndL.Gui.Views
 
             partyBar.PlayerSelectedEvent += (_, e) =>
             {
-                if (otherStats.DataContext.GetType() != typeof(EntityDescriptionViewModel))
-                    throw new InvalidProgramException("expects view model");
+                //if (otherStats.DataContext.GetType() != typeof(EntityDescriptionViewModel))
+                //    throw new InvalidProgramException("expects view model");
 
-                otherStats.DataContext = new EntityDescriptionViewModel(e.Value);
+                //otherStats.DataContext = new EntityDescriptionViewModel(e.Value);
 
             };
         }

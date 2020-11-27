@@ -1,6 +1,6 @@
 ﻿using DndL.Game._5e;
 using DndL.Game.Dice;
-using DndL.Gui.Commands;
+using DndL.Gui.Core.Commands;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
