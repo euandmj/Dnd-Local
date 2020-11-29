@@ -88,7 +88,8 @@ namespace DndL.Gui.ViewModels
             {
                 await canvasClient.PointStream().ForEachAsync(x =>
                 {
-                    LineReceived?.Invoke(new DrawnLineEventArgs(x.ToDrawnLine()));
+                    if (Guid.Parse(x.Id) != DndL.Client.App.ClientSessionID)
+                        LineReceived?.Invoke(new DrawnLineEventArgs(x.ToDrawnLine()));
                 });
             }
             catch (Exception ex)

@@ -29,6 +29,7 @@ message PointPacket {
 	repeated int32 Y = 2;
 	string StrokeBrush = 3;
 	int32 StrokeThickness = 4;
+	string Id = 5;
 }
 
 message CanvasEventPacket {

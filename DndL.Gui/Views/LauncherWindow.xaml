@@ -6,9 +6,11 @@
         xmlns:conv="clr-namespace:DndL.Gui.Core.Converters;assembly=DndL.Gui.Core"
         xmlns:its="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:ity="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:local="clr-namespace:DndL.Gui.Views"
+        xmlns:local="clr-namespace:DndL.Gui.Views"        
+        ResizeMode="NoResize"
         mc:Ignorable="d"
-        Title="LauncherWindow" Height="450" Width="800">
+        Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     
     <Window.Resources>
         <ResourceDictionary>
@@ -17,7 +19,14 @@
     </Window.Resources>
     
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
         <ItemsControl ItemsSource="{Binding PartyMembers}"
+                      Grid.Row="0"
+                      Margin="0 35 0 0"                      
                       HorizontalAlignment="Center"
                       Tag="{Binding .}">
             <ItemsControl.ItemsPanel>
@@ -48,5 +57,10 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <Label Content="Select Character to Play" 
+               Margin="0 15 0 0"
+               Grid.Row="1"
+               HorizontalAlignment="Center"/>
     </Grid>
 </Window>

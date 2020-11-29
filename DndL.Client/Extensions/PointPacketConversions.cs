@@ -9,7 +9,8 @@ namespace DndL.Client.Extensions
             var pp = new PointPacket
             {
                 StrokeBrush = dl.StrokeBrush,
-                StrokeThickness = dl.StrokeThickness
+                StrokeThickness = dl.StrokeThickness,
+                Id = dl.ID.ToString()
             };
 
             pp.X.AddRange(dl.X);
@@ -24,7 +25,8 @@ namespace DndL.Client.Extensions
                 X = pp.X,
                 Y = pp.Y,
                 StrokeBrush = pp.StrokeBrush,
-                StrokeThickness = pp.StrokeThickness
+                StrokeThickness = pp.StrokeThickness,
+                ID = System.Guid.Parse(pp.Id)
             };
     }
 }

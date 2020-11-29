@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DndL.Core.Model
 {
@@ -8,5 +9,6 @@ namespace DndL.Core.Model
         public IList<int> Y;
         public string StrokeBrush;
         public int StrokeThickness;
+        public Guid ID;
     }
 }

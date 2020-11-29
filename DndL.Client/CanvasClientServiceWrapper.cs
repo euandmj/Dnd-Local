@@ -11,13 +11,21 @@ using static DndL.Client.GameService;
 
 namespace DndL.Client
 {
-    public class CanvasClientServiceWrapper
+    public static class App
     {
+        public static Guid ClientSessionID = Guid.NewGuid();
+    }
+
+    public class CanvasClientServiceWrapper
+    {        
         private readonly CanvasServiceClient _client =
               new(GrpcChannel.ForAddress("https://localhost:5001"));
 
         public async Task SendPoint(PointPacket p)
-           => await _client.SendPointAsync(p);
+        {
+            p.Id = App.ClientSessionID.ToString();
+            await _client.SendPointAsync(p);
+        }
 
         public IAsyncEnumerable<PointPacket> PointStream()
         {
