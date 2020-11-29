@@ -17,15 +17,9 @@ namespace DndL.Game._5e
         [JsonInclude] 
         public string Name { get; set; }
 
-        [JsonIgnore]
-        public Bitmap CharImage { get; set; }
-
         [JsonInclude]
-        public byte[] CharImageBytes
-        {
-            get => CharImage.ToBytes();
-            set => CharImage = BitmapExtensions.FromBytes(value);
-        }
+        [JsonConverter(typeof(Core.Serialization.BitmapJsonConverter))]
+        public Bitmap CharImage { get; set; }
 
 
         [JsonInclude]
