@@ -15,6 +15,14 @@ service CanvasService {
   rpc CanvasSubcription(CanvasEventPacket) returns (google.protobuf.Empty);
 
 }
+service GameService {
+	rpc SendPartyMember(PartyMemberMessage) returns (google.protobuf.Empty);	
+	rpc GetMembers(google.protobuf.Empty) returns (PartyMembers);
+	rpc GetPlayer(IDMessage) returns (PartyMemberMessage);
+
+	//rpc GameUpdateStream()
+
+}
 
 message PointPacket {
 	repeated int32 X = 1;
@@ -28,5 +36,14 @@ message CanvasEventPacket {
 	string clientID = 2;
 }
 
+message IDMessage {
+	string ID = 1;
+}
 
 
+message PartyMemberMessage {
+	string JSON = 1; // Serialized json of info, stats etc. 
+}
+message PartyMembers {
+	repeated PartyMemberMessage Members = 1;
+}

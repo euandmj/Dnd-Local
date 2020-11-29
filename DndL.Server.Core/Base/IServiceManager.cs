@@ -1,14 +1,7 @@
-﻿using System;
-
-namespace DndL.Server.Core.Base
+﻿namespace DndL.Server.Core.Base
 {
-    public interface IServiceManager<TSource, TPacket>
+    public interface IServiceManager
     {
-        event Action<TPacket> Added;
-
-        static TSource Instance { get; }
-
-        void Add(TPacket packet);
-        IObservable<TPacket> Get();
+        static IServiceManager Instance { get; }
     }
 }

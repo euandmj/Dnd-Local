@@ -1,15 +1,13 @@
-﻿using DndL.Core.Model;
-using DndL.Server.Core.Base;
+﻿using DndL.Server.Core.Base;
 using System;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
 using System.Linq;
 using System.Reactive.Linq;
 
 namespace DndL.Server.ServiceControllers
 {
     public class PointServiceController
-        : IServiceManager<PointServiceController, PointPacket>
+        : IServiceManager
     {
         public event Action<PointPacket> Added;
 
@@ -29,7 +27,8 @@ namespace DndL.Server.ServiceControllers
             return existing.Concat(newl);
         }
 
-        private static readonly Lazy<PointServiceController> PSC = new Lazy<PointServiceController>(() => new PointServiceController());
+        private static readonly Lazy<PointServiceController> PSC 
+            = new Lazy<PointServiceController>(() => new PointServiceController());
         public static PointServiceController Instance => PSC.Value;
     }
 }

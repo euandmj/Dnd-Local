@@ -8,6 +8,10 @@ namespace DndL.Game.Base
     {
         IBaseCharacter Player { get; set; }
         IDictionary<Guid, IBaseCharacter> Party { get; set; }
+
+        void SetPlayer(Guid id);
+
+        void Init(params object[] args);
     }
 
     public static class GameContainer
@@ -25,5 +29,9 @@ namespace DndL.Game.Base
             var x = Container.Value.Resolve<IGame>();
             return x;
         }
+
+        public static IGameServer GetGameServer()
+            => Container.Value.Resolve<IGameServer>();
+
     }
 }

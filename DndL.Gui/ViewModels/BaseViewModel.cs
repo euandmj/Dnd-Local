@@ -1,4 +1,4 @@
-﻿using DndL.Client;
+﻿using DndL.Game.Base;
 
 namespace DndL.Gui.ViewModels
 {
@@ -6,7 +6,13 @@ namespace DndL.Gui.ViewModels
         : DndL.Core.NotifyPropertyChanged
     {
         private string title = string.Empty;
-        protected readonly ClientContainer client = new();
+        protected readonly Client.CanvasClientServiceWrapper canvasClient = new();
+        protected IGame game;
+
+        public BaseViewModel()
+        {
+            game = Game.Base.GameContainer.GetGame();
+        }
 
         public string Title
         {

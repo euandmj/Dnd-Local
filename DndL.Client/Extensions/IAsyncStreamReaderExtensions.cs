@@ -18,7 +18,6 @@ namespace DndL.Client.Extensions
         public static IAsyncEnumerable<T> ToAsyncEnumerable<T>(this IAsyncStreamReader<T> asyncStreamReader)
         {
             if (asyncStreamReader is null) { throw new ArgumentNullException(nameof(asyncStreamReader)); }
-
             return new ToAsyncEnumerableEnumerable<T>(asyncStreamReader);
         }
 
@@ -53,10 +52,10 @@ namespace DndL.Client.Extensions
             }
         }
 
-        public static async void ForEachAsync<T>(this IAsyncEnumerable<T> l, Func<T, Task> func)
+        public static async Task ForEachAsync<T>(this IAsyncEnumerable<T> l, Action<T> act)
         {
             await foreach (var val in l)
-                await func(val);
+                act(val);
         }
     }
 }

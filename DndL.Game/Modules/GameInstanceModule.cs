@@ -3,13 +3,20 @@ using DndL.Game.Base;
 
 namespace DndL.Game.Modules
 {
-    public class GameInstanceModule
+    internal sealed class GameInstanceModule
         : Module
     {
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<_5e._5eGame>().As<IGame>();
+            builder
+                .RegisterType<_5e._5eGame>()
+                .As<IGame>()
+                .InstancePerLifetimeScope();
+            builder
+                .RegisterType<_5e._5eGameServer>()
+                .As<IGameServer>()
+                .InstancePerLifetimeScope();
         }
     }
 }

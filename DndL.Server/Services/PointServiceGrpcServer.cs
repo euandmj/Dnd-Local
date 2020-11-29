@@ -1,5 +1,4 @@
-﻿using DndL.Server.Extensions;
-using DndL.Server.ServiceControllers;
+﻿using DndL.Server.ServiceControllers;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;

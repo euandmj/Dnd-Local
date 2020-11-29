@@ -29,8 +29,8 @@ namespace DndL.Server
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapGrpcService<GreeterService>();
                 endpoints.MapGrpcService<PointServiceGrpcServer>();
+                endpoints.MapGrpcService<GameServiceGrpcServer>();
 
                 endpoints.MapGet("/", async context =>
                 {

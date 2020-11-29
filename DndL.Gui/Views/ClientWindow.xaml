@@ -1,4 +1,4 @@
-﻿<Window x:Class="DndL.Gui.Views.MainWindow"
+﻿<Window x:Class="DndL.Gui.Views.ClientWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,7 @@
         xmlns:model="clr-namespace:DndL.Gui.Model"
         xmlns:views="clr-namespace:DndL.Gui.Views"
         Loaded="Window_Loaded"
+        Initialized="Window_Initialized"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="1050"

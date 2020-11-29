@@ -8,15 +8,15 @@ namespace DndL.Gui.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ClientWindow : Window
     {
-        private readonly MainWindowViewModel viewModel;
+        private readonly ClientWindowViewModel viewModel;
 
-        public MainWindow()
+        public ClientWindow()
         {
             InitializeComponent();
 
-            DataContext = viewModel = new MainWindowViewModel();
+            DataContext = viewModel = new ClientWindowViewModel();
 
 
             partyBar.PlayerSelectedEvent += (_, e) =>
@@ -54,8 +54,19 @@ namespace DndL.Gui.Views
                 selfGrid.Children.Add(selfStats);
                 selfGrid.Children.Add(selfSkills);
 
+
+
             }
 
+        }
+
+        private void Window_Initialized(object sender, System.EventArgs e)
+        {
+            //var x = MessageBox.Show("yes - p1. no - p2", "select player", MessageBoxButton.YesNo);
+            //if(x == MessageBoxResult.Yes)
+            //{
+            //    Game.Base.GameContainer.GetGame().
+            //}
         }
     }
 }

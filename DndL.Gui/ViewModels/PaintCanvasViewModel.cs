@@ -86,7 +86,7 @@ namespace DndL.Gui.ViewModels
         {
             try
             {
-                await client.PointStream().ForEachAsync(x =>
+                await canvasClient.PointStream().ForEachAsync(x =>
                 {
                     LineReceived?.Invoke(new DrawnLineEventArgs(x.ToDrawnLine()));
                 });
@@ -136,7 +136,7 @@ namespace DndL.Gui.ViewModels
         {
             try
             {
-                await client.SendPoint(e.Point.ToPointPacket());
+                await canvasClient.SendPoint(e.Point.ToPointPacket());
             }
             catch (Exception ex)
             {

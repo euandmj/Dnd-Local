@@ -30,7 +30,7 @@ namespace DndL.Game.Views.Views
     }
 
     class SelfStatsViewModel 
-        : ViewModels.BaseViewModel
+        : ViewModels.GameViewModel
     {
 
 

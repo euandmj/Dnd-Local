@@ -1,23 +1,24 @@
 ﻿using DndL.Game._5e;
 using DndL.Game.Base;
-using System;
-using System.Collections.Generic;
 
 namespace DndL.Game.Views.ViewModels
 {
-    abstract class BaseViewModel
+    abstract class GameViewModel
         : Core.NotifyPropertyChanged
     {
 
         private string title = string.Empty;
-        // move client stuff into a wrapper in DndL.Game.
-        //protected readonly ClientContainer client = new();
+        protected readonly IGame _game;
+        protected PlayerCharacter selfPlayer;
 
-        protected PlayerCharacter selfPlayer =
-            DndL.Game.Base.GameContainer.GetGame().Player as PlayerCharacter;
+        public GameViewModel()
+        {
+            _game = Game.Base.GameContainer.GetGame();
 
-        protected IDictionary<Guid, IBaseCharacter> partyCharacters =
-            DndL.Game.Base.GameContainer.GetGame().Party;
+            selfPlayer = _game.Player as PlayerCharacter;
+        }
+
+       
 
         public string Title
         {

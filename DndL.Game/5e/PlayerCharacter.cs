@@ -1,18 +1,34 @@
 ﻿using DndL.Core;
+using DndL.Core.Extensions;
 using DndL.Game.Base;
 using System;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Text.Json.Serialization;
 
 namespace DndL.Game._5e
 {
     public class PlayerCharacter
         : NotifyPropertyChanged, IBaseCharacter
     {
-        public Guid ID { get; init; } = new Guid();
-        public string Name { get; set; }
-        public Bitmap CharImage { get; init; }
+        [JsonInclude]
+        public Guid ID { get; init; } = Guid.NewGuid();
 
+        [JsonInclude] 
+        public string Name { get; set; }
+
+        [JsonIgnore]
+        public Bitmap CharImage { get; set; }
+
+        [JsonInclude]
+        public byte[] CharImageBytes
+        {
+            get => CharImage.ToBytes();
+            set => CharImage = BitmapExtensions.FromBytes(value);
+        }
+
+
+        [JsonInclude]
         public ObservableCollection<Stat> MajorStats
         {
             get => new ObservableCollection<Stat>()
@@ -25,6 +41,8 @@ namespace DndL.Game._5e
                 new Stat { Name = "Charisma" },
             };
         }
+
+        [JsonInclude]
         public ObservableCollection<Stat> MinorStats
         {
             get => new ObservableCollection<Stat>()
@@ -51,16 +69,25 @@ namespace DndL.Game._5e
             };
         }
 
+        [JsonInclude]
         public ObservableCollection<AttackSpell> AttacksSpells { get; set; }
+        
+        [JsonIgnore] private int _armorClass;
 
-        private int _armorClass;
-        public int ArmorClass { get => _armorClass; set => SetProperty(ref _armorClass, value); }
-        public int Initiative { get; set; }
-        public int Speed { get; set; }
-        public int MaxHP { get; set; }
-        public float CurrentHP { get; set; }
-        public float TemporaryHP { get; set; }
-        public int TotalHitDice { get; set; }
-        public int CurrentHitDice { get; set; }
+        [JsonInclude] public int ArmorClass { get => _armorClass; set => SetProperty(ref _armorClass, value); }
+        
+        [JsonInclude] public int Initiative { get; set; }
+        
+        [JsonInclude] public int Speed { get; set; }
+                      
+        [JsonInclude] public int MaxHP { get; set; }
+                      
+        [JsonInclude] public float CurrentHP { get; set; }
+                      
+        [JsonInclude] public float TemporaryHP { get; set; }
+                      
+        [JsonInclude] public int TotalHitDice { get; set; }
+                      
+        [JsonInclude] public int CurrentHitDice { get; set; }
     }
 }

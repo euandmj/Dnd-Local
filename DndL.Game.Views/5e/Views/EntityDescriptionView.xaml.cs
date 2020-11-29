@@ -26,27 +26,27 @@ namespace DndL.Game.Views.Views
         {
             InitializeComponent();
 
-            DataContext = new EntityDescriptionViewModel(
-                new NPlayerCharacter()
-                {
-                    Name = "bob jovine",
-                    CharImage = Game.Properties.Resources.psionic3,
-                    DescriptionShort = "Tonight I'll probably be playing games to tide over time but I have some training for work I need to do so staying late"
-                });
+            DataContext = new EntityDescriptionViewModel();
+                //new NPlayerCharacter()
+                //{
+                //    Name = "bob jovine",
+                //    CharImage = Game.Properties.Resources.psionic3,
+                //    DescriptionShort = "Tonight I'll probably be playing games to tide over time but I have some training for work I need to do so staying late"
+                //});
         }
 
     }
 
     class EntityDescriptionViewModel
-        : BaseViewModel
+        : GameViewModel
     {
         private NPlayerCharacter _character;
 
 
-        public EntityDescriptionViewModel(NPlayerCharacter npc)
+        public EntityDescriptionViewModel()
         {
 
-            Character = npc;
+            //Character = npc;
         }
 
 

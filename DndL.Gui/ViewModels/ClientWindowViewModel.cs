@@ -9,11 +9,11 @@ using System.Windows;
 
 namespace DndL.Gui.ViewModels
 {
-    class MainWindowViewModel
+    class ClientWindowViewModel
         : BaseViewModel
     {
 
-        public MainWindowViewModel()
+        public ClientWindowViewModel()
         {            
 
         }
