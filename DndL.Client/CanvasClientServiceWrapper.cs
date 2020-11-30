@@ -34,6 +34,25 @@ namespace DndL.Client
             return call.ResponseStream
                 .ToAsyncEnumerable();
         }
+
+        public async Task SendClearPoint(PointPacket p)
+		{
+            p.Id = App.ClientSessionID.ToString();
+            await _client.SendPointAsync(p);
+		}
+
+        public async Task SendClear(CanvasEventPacket p, Int32 EventType)
+		{
+            p.ClientID = App.ClientSessionID.ToString();
+            p.EventType = EventType;
+            await _client.SendClearAsync(p);
+		} 
+        public async Task CanvasSubcription(CanvasEventPacket p, Int32 EventType)
+		{
+            p.ClientID = App.ClientSessionID.ToString();
+            p.EventType = EventType;
+            await _client.SendClearAsync(p);
+        }
     }
 
     public class GameServiceWrapper

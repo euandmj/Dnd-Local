@@ -9,6 +9,8 @@ package greet;
 service CanvasService {
   rpc SendPoint (PointPacket) returns (google.protobuf.Empty);
   rpc PointSubscription(google.protobuf.Empty) returns (stream PointPacket);
+  
+  rpc SendPointClear(PointPacket) returns(google.protobuf.Empty);
 
   rpc SendClear(CanvasEventPacket) returns (google.protobuf.Empty);
 
@@ -29,6 +31,7 @@ message PointPacket {
 	repeated int32 Y = 2;
 	string StrokeBrush = 3;
 	int32 StrokeThickness = 4;
+	bool clear = 5;
 }
 
 message CanvasEventPacket {

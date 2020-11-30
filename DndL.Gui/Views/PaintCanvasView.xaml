@@ -67,6 +67,10 @@
                     Height="auto"
                     Content="Move"
                     Command="{Binding MoveCommand}" />
+			<Button Width="auto"
+                    Height="auto"
+                    Content="Clear"
+                    Command="{Binding ClearCommand}" />
             <Button Width="auto"
                     Height="auto"
                     Content="Brush1"
@@ -77,6 +81,11 @@
                     Content="Brush2"
                     IsEnabled="{Binding Brush2Enabled}"
                     Command="{Binding Brush2Command}" />
+			<Button Width="auto"
+                    Height="auto"
+                    Content="Rubber"
+                    IsEnabled="{Binding RubberEnabled}"
+                    Command="{Binding RubberCommand}" />
 
 
             <xctk:DoubleUpDown Value="{Binding ActiveBrush.Thickness, Mode=TwoWay}"

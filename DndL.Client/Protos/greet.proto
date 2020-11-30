@@ -8,6 +8,8 @@ service CanvasService {
   rpc SendPoint (PointPacket) returns (google.protobuf.Empty);
   rpc PointSubscription(google.protobuf.Empty) returns (stream PointPacket);
 
+  rpc SendPointClear(PointPacket) returns(google.protobuf.Empty);
+
   rpc SendClear(CanvasEventPacket) returns (google.protobuf.Empty);
 
   rpc CanvasSubcription(CanvasEventPacket) returns (google.protobuf.Empty);
@@ -30,6 +32,7 @@ message PointPacket {
 	string StrokeBrush = 3;
 	int32 StrokeThickness = 4;
 	string Id = 5;
+	bool clear = 5;
 }
 
 message CanvasEventPacket {

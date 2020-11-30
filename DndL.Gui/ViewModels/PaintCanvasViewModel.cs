@@ -22,6 +22,7 @@ namespace DndL.Gui.ViewModels
         private CanvasBrush activeBrush;
         private readonly CanvasBrush brush1 = new();
         private readonly CanvasBrush brush2 = new();
+        private readonly CanvasBrush rubber = new();
 
         private SolidColorBrush canvasBrush = Brushes.AntiqueWhite;
 
@@ -37,6 +38,7 @@ namespace DndL.Gui.ViewModels
 
             Brush1Command = new Command((x) => ActiveBrush = brush1);
             Brush2Command = new Command((x) => ActiveBrush = brush2);
+            RubberCommand = new Command((x) => ActiveBrush = rubber);
             MouseUpCommand = new Command((x) =>
             {
                 if (currentLine?.Points?.Count > 0)
@@ -52,6 +54,7 @@ namespace DndL.Gui.ViewModels
         public ObservableCollection<IInputElement> CanvasChildren { get; set; } = new();
         public ICommand Brush1Command { get; }
         public ICommand Brush2Command { get; }
+        public ICommand RubberCommand { get; }
         public ICommand MouseUpCommand { get; }
 
         public SolidColorBrush CanvasBrush
