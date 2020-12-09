@@ -3,7 +3,7 @@ using DndL.Game.Base;
 
 namespace DndL.Game.Views.ViewModels
 {
-    abstract class GameViewModel
+    public abstract class GameViewModel
         : Core.NotifyPropertyChanged
     {
 

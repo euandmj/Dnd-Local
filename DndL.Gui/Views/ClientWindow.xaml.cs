@@ -1,7 +1,6 @@
-﻿using DndL.Game.Views.Views;
+﻿using DndL.Game.Views._5e.ViewModels;
 using DndL.Gui.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace DndL.Gui.Views
 {
@@ -12,6 +11,8 @@ namespace DndL.Gui.Views
     {
         private readonly ClientWindowViewModel viewModel;
 
+        //private UserControl playerStatsFull, selfStats, selfSkills, entityDesc; 
+
         public ClientWindow()
         {
             InitializeComponent();
@@ -21,11 +22,7 @@ namespace DndL.Gui.Views
 
             partyBar.PlayerSelectedEvent += (_, e) =>
             {
-                //if (otherStats.DataContext.GetType() != typeof(EntityDescriptionViewModel))
-                //    throw new InvalidProgramException("expects view model");
-
-                //otherStats.DataContext = new EntityDescriptionViewModel(e.Value);
-
+                otherStats.DataContext = new EntityDescriptionViewModel(e.Value);
             };
         }
 
@@ -34,39 +31,26 @@ namespace DndL.Gui.Views
             // USE THIS METHOD AS A TEMPLATE FOR HOT SWAPPING UI
             if (true)
             {
-                var playerStats = new PlayerStatsView();
-                Grid.SetRow(playerStats, 1);
-                Grid.SetColumn(playerStats, 0);
-                Grid.SetRowSpan(playerStats, 3);
+                //playerStatsFull = new PlayerStatsView();
+                //Grid.SetRow(playerStatsFull, 1);
+                //Grid.SetColumn(playerStatsFull, 0);
+                //Grid.SetRowSpan(playerStatsFull, 3);
 
-                var entityDesc = new EntityDescriptionView();
-                Grid.SetRow(entityDesc, 1);
-                Grid.SetColumn(entityDesc, 2);
+                //entityDesc = new EntityDescriptionView();
+                //Grid.SetRow(entityDesc, 1);
+                //Grid.SetColumn(entityDesc, 2);
 
-                var selfStats = new SelfStatsView();
-                Grid.SetColumn(selfStats, 0);
+                //selfStats = new SelfStatsView();
+                //Grid.SetColumn(selfStats, 0);
 
-                var selfSkills = new PlayerSpellsView();
-                Grid.SetColumn(selfSkills, 1);
+                //selfSkills = new PlayerSpellsView();
+                //Grid.SetColumn(selfSkills, 1);
                 
-                grid.Children.Add(playerStats);
-                grid.Children.Add(entityDesc);
-                selfGrid.Children.Add(selfStats);
-                selfGrid.Children.Add(selfSkills);
-
-
-
+                //grid.Children.Add(playerStatsFull);
+                //grid.Children.Add(entityDesc);
+                //selfGrid.Children.Add(selfStats);
+                //selfGrid.Children.Add(selfSkills);
             }
-
-        }
-
-        private void Window_Initialized(object sender, System.EventArgs e)
-        {
-            //var x = MessageBox.Show("yes - p1. no - p2", "select player", MessageBoxButton.YesNo);
-            //if(x == MessageBoxResult.Yes)
-            //{
-            //    Game.Base.GameContainer.GetGame().
-            //}
         }
     }
 }

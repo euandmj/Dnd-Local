@@ -5,11 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:its="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:ity="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:local="clr-namespace:DndL.Game.Views.Views"         
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:local="clr-namespace:DndL.Game.Views.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
+            <FontFamily x:Key="FontFamily">Segoe UI</FontFamily>
+            <Brush x:Key="ColorTheme">Black</Brush>
             <Style TargetType="Border"
                    x:Key="BorderStyle">
                 <Setter Property="BorderBrush"
@@ -21,18 +24,25 @@
                 <Setter Property="Height"
                         Value="auto" />
             </Style>
-            
-            <TextBox x:Key="txtSubmit"
-                     HorizontalAlignment="Center">
-                <ity:Interaction.Triggers>
-                    <ity:EventTrigger EventName="TextChanged">
-                        <its:CallMethodAction TargetObject="{Binding}"
-                                              MethodName="TextChanged" />
-                    </ity:EventTrigger>
-                </ity:Interaction.Triggers>
-            </TextBox>
+
+            <Style x:Key="EditableStatTextBox"
+                   TargetType="TextBox">
+                <Setter Property="Background"
+                        Value="Transparent" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource FontFamily}" />
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Setter Property="HorizontalAlignment"
+                        Value="Center" />
+                <Setter Property="BorderThickness"
+                        Value="0 0 0 1" />
+                <Setter Property="BorderBrush"
+                        Value="{StaticResource ColorTheme}" />
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".33*" />
@@ -45,22 +55,16 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        
+
         <!-- Armor/Initiative/Speed -->
         <Border Style="{StaticResource BorderStyle}"
                 Grid.Row="0"
                 Grid.Column="0">
-            <StackPanel Orientation="Vertical" 
+            <StackPanel Orientation="Vertical"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Center">
                 <TextBox Text="{Binding Player.ArmorClass, Mode=TwoWay}"
-                         HorizontalAlignment="Center">
-                    <ity:Interaction.Triggers>
-                        <ity:EventTrigger EventName="TextChanged">
-                            <ity:InvokeCommandAction Command="{Binding TextChangedCommand}"/>
-                        </ity:EventTrigger>
-                    </ity:Interaction.Triggers>
-                </TextBox>
+                         Style="{StaticResource EditableStatTextBox}" />
                 <Label Content="ARMOR CLASS" />
             </StackPanel>
         </Border>
@@ -70,8 +74,8 @@
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Center">
-                <Label Content="{Binding Player.Initiative}"
-                       HorizontalAlignment="Center" />
+                <TextBox Text="{Binding Player.Initiative}"
+                         Style="{StaticResource EditableStatTextBox}" />
                 <Label Content="INITIATIVE" />
             </StackPanel>
         </Border>
@@ -81,13 +85,13 @@
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Center">
-                <Label Content="{Binding Player.Speed}"
-                       HorizontalAlignment="Center" />
+                <TextBox Text="{Binding Player.Speed}"
+                         Style="{StaticResource EditableStatTextBox}" />
                 <Label Content="SPEED" />
             </StackPanel>
         </Border>
-        
-        
+
+
         <!-- Current HP -->
         <Border Style="{StaticResource BorderStyle}"
                 Grid.Row="1"
@@ -96,29 +100,30 @@
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Hit Point Maximum" />
-                    <Label Content="{Binding Player.MaxHP}" />
+                    <TextBox Text="{Binding Player.MaxHP}"
+                             Style="{StaticResource EditableStatTextBox}" />
                 </StackPanel>
-                <Label Content="{Binding Player.CurrentHP}"
-                       HorizontalAlignment="Center" />
+                <TextBox Text="{Binding Player.CurrentHP}"
+                         Style="{StaticResource EditableStatTextBox}" />
                 <Label Content="CURRENT HIT POINTS"
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Bottom"/>
+                       VerticalAlignment="Bottom" />
             </StackPanel>
         </Border>
-        
+
         <!-- Temporary HP -->
         <Border Style="{StaticResource BorderStyle}"
                 Grid.Row="2"
                 Grid.ColumnSpan="3"
                 Grid.Column="0">
             <StackPanel Orientation="Vertical">
-                <Label Content="{Binding Player.TemporaryHP}"
-                       HorizontalAlignment="Center" />
+                <TextBox Text="{Binding Player.TemporaryHP}"
+                         Style="{StaticResource EditableStatTextBox}" />
                 <Label Content="TEMPORARY HIT POINTS"
                        HorizontalAlignment="Center" />
             </StackPanel>
         </Border>
-        
+
         <!-- Hit Dice / Saving Throws -->
         <StackPanel Grid.Row="3"
                     Grid.Column="0"
@@ -129,11 +134,12 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Total" />
-                        <Label Content="{Binding Player.TotalHitDice}" />
+                        <TextBox Text="{Binding Player.TotalHitDice}"
+                                 Style="{StaticResource EditableStatTextBox}" />
                     </StackPanel>
 
-                    <Label Content="{Binding Player.CurrentHitDice}"
-                           HorizontalAlignment="Center"/>
+                    <TextBox Text="{Binding Player.CurrentHitDice}"
+                             Style="{StaticResource EditableStatTextBox}" />
                     <Label Content="HIT DICE"
                            HorizontalAlignment="Center" />
                 </StackPanel>
@@ -141,7 +147,7 @@
 
             <Border Style="{StaticResource BorderStyle}">
                 <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal" >
+                    <StackPanel Orientation="Horizontal">
                         <Label Content="SUCCESSES"
                                HorizontalAlignment="Left" />
                         <!--TODO: replace with control -->
@@ -174,7 +180,7 @@
                 </StackPanel>
             </Border>
         </StackPanel>
-        
-        
+
+
     </Grid>
 </UserControl>

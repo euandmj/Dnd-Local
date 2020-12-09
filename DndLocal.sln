@@ -18,11 +18,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8045E744-2555-4D03-96D3-B283263AFB8E}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		todo.txt = todo.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DndL.Game.Views", "DndL.Game.Views\DndL.Game.Views.csproj", "{AA949CBD-A086-4CE7-9885-1265441D2793}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DndL.Game.Views", "DndL.Game.Views\DndL.Game.Views.csproj", "{AA949CBD-A086-4CE7-9885-1265441D2793}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DndL.Gui.Core", "DndL.Gui.Core\DndL.Gui.Core.csproj", "{142AFB43-6F1A-435E-8B80-F711A05759C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DndL.Gui.Core", "DndL.Gui.Core\DndL.Gui.Core.csproj", "{142AFB43-6F1A-435E-8B80-F711A05759C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
