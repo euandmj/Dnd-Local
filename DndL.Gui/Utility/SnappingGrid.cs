@@ -9,9 +9,9 @@ namespace DndL.Gui.Utility
         public int High { get; set; }
         public int Wide { get; set; }
 
-        public float CellWidth => (float)(Parent.Width / Wide);
+        public float CellWidth => (float)(Parent.ActualWidth / Wide);
 
-        public float CellHeight => (float)(Parent.Height / High);
+        public float CellHeight => (float)(Parent.ActualHeight / High);
 
         public double Width => Parent.Width;
         public double Height => Parent.Height;
@@ -19,7 +19,7 @@ namespace DndL.Gui.Utility
 
         public SnappingGridUtil(FrameworkElement parent)
         {
-            //if (double.IsNaN(parent.Width) || double.IsNaN(parent.Height)) throw new System.ArgumentException("parent dimensions cannot be NaN", nameof(parent));
+            if (double.IsNaN(parent.ActualWidth) || double.IsNaN(parent.ActualHeight)) throw new System.ArgumentException("parent dimensions cannot be NaN", nameof(parent));
 
 
             Parent = parent;
