@@ -23,13 +23,10 @@ namespace DndL.Game._5e
         public _5eGame()
         {
             client = new();
-
-            // load player from disk
-            
+                        
             Party = new ObservableConcurrentDictionary<Guid, IBaseCharacter>();
 
-
-            LoadPlayers();
+            //LoadPlayers();
         }
 
         private void LoadPlayers()
