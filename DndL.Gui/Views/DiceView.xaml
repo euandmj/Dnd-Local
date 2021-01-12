@@ -7,11 +7,13 @@
              xmlns:ity="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:conv="clr-namespace:DndL.Gui.Core.Converters;assembly=DndL.Gui.Core"
              xmlns:local="clr-namespace:DndL.Gui.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <conv:ObjectToDisplayValueConverter x:Key="dnConv" />
+            <conv:DieAttributeImageConverter x:Key="attrConv" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -34,18 +36,30 @@
 
         <Button Width="auto"
                 Height="auto"
-                Content="Roll!" 
+                Content="Roll!"
                 Command="{Binding RollCommand}"
-                Grid.Row="1"/>
+                Grid.Row="1" />
 
-        <TextBox Text="{Binding CurrentValue}"
-                 BorderBrush="Black"
-                 BorderThickness="2"
-                 IsReadOnly="True"
-                 HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Center" 
-                 VerticalContentAlignment="Center"
-                 Grid.Row="2" />
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center"
+                    Grid.Row="2">
+
+            <Label Content="{Binding CurrentValue, Mode=OneWay}"
+                   FontWeight="DemiBold"
+                   HorizontalAlignment="Stretch"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center" />
+
+            <Border Width="85"
+                    Height="85"
+                    Background="{Binding CurrentAttr}">
+                <Image Source="{Binding CurrentAttribute, Converter={StaticResource attrConv}}"
+                        />
+            </Border>
+        </StackPanel>
+
+
+
 
     </Grid>
 </UserControl>

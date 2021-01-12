@@ -15,7 +15,10 @@ namespace DndL.Gui.Core.Converters
 
             var attr = (DisplayNameAttribute)value.GetType().GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault();
 
-            return attr?.DisplayName;
+            return attr is null
+                ? value.ToString()
+                : attr.DisplayName;
+            //return attr?.DisplayName;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

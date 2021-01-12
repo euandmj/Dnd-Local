@@ -24,13 +24,12 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
 
-        <Canvas x:Name="Canvas"
-                Background="{Binding CanvasBrush}"
+        <Canvas x:Name="Canvas"           
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.RowSpan="1"
@@ -56,8 +55,12 @@
                     <ity:InvokeCommandAction Command="{Binding MouseUpCommand}" />
                 </ity:EventTrigger>
             </ity:Interaction.Triggers>
+
+            <Canvas.Background>
+                <ImageBrush ImageSource="{Binding Background}" />
+            </Canvas.Background>
         </Canvas>
-        
+
         <StackPanel Orientation="Horizontal"
                     VerticalAlignment="Stretch"
                     Grid.Row="0"
@@ -77,6 +80,10 @@
                     Content="Brush2"
                     IsEnabled="{Binding Brush2Enabled}"
                     Command="{Binding Brush2Command}" />
+            <Button Width="auto"
+                    Height="auto"
+                    Content="Img"
+                    Command="{Binding SwitchBackgroundCommand}" />
 
 
             <xctk:DoubleUpDown Value="{Binding ActiveBrush.Thickness, Mode=TwoWay}"

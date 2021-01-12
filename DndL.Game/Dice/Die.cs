@@ -12,11 +12,11 @@ namespace DndL.Game.Dice
         protected readonly int limit = Enum.GetValues(typeof(TDieEnum)).Length;
         protected readonly Random rand = new Random();
 
-        public Enum Roll()
+        public virtual Enum Roll()
         {
-            var randInt = rand.Next(0, limit);
+            var randInt = rand.Next(0, limit).ToString();
 
-            if (!Enum.TryParse(typeof(TDieEnum), randInt.ToString(), out var enu))
+            if (!Enum.TryParse(typeof(TDieEnum), randInt, out var enu))
             {
                 throw new InvalidProgramException("the random int should be convertable to T. Is T enum int?");
             }

@@ -11,4 +11,8 @@
     <ProjectReference Include="..\DndL.Gui.Core\DndL.Gui.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EoE\" />
+  </ItemGroup>
+
 </Project>

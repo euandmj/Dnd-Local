@@ -2,12 +2,15 @@
 using DndL.Core.Events;
 using DndL.Gui.Core.Commands;
 using DndL.Gui.Model;
+using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static DndL.Core.Events.DrawnLineEventArgs;
 
@@ -23,6 +26,8 @@ namespace DndL.Gui.ViewModels
         private readonly CanvasBrush brush1 = new();
         private readonly CanvasBrush brush2 = new();
 
+        private BitmapImage canvasBackground;
+
         private SolidColorBrush canvasBrush = Brushes.AntiqueWhite;
 
         private Point currentPoint;
@@ -37,14 +42,15 @@ namespace DndL.Gui.ViewModels
 
             Brush1Command = new Command((x) => ActiveBrush = brush1);
             Brush2Command = new Command((x) => ActiveBrush = brush2);
-            MouseUpCommand = new Command((x) =>
-            {
-                if (currentLine?.Points?.Count > 0)
-                    LineDrawn?.Invoke(
-                        new DrawnLineEventArgs(
-                            currentLine.ToDrawnLine(ActiveBrush.Color, 
-                            ActiveBrush.Thickness)));
-            });
+            //MouseUpCommand = new Command((x) =>
+            //{
+            //    if (currentLine?.Points?.Count > 0)
+            //        LineDrawn?.Invoke(
+            //            new DrawnLineEventArgs(
+            //                currentLine.ToDrawnLine(ActiveBrush.Color, 
+            //                ActiveBrush.Thickness)));
+            //});
+
 
             activeBrush = brush1;
         }
@@ -52,7 +58,32 @@ namespace DndL.Gui.ViewModels
         public ObservableCollection<IInputElement> CanvasChildren { get; set; } = new();
         public ICommand Brush1Command { get; }
         public ICommand Brush2Command { get; }
-        public ICommand MouseUpCommand { get; }
+        public ICommand MouseUpCommand 
+            => new Command((x) =>
+            {
+                if (currentLine?.Points?.Count > 0)
+                    LineDrawn?.Invoke(
+                        new DrawnLineEventArgs(
+                            currentLine.ToDrawnLine(ActiveBrush.Color,
+                            ActiveBrush.Thickness)));
+            });
+        public ICommand SwitchBackgroundCommand
+            => new Command((x) =>
+            {
+                var dialog = new OpenFileDialog
+                {
+                    CheckPathExists = true,
+                    DefaultExt = "png",
+                    Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png"
+                };
+
+                var res = dialog.ShowDialog();
+                if (res.HasValue && res.Value)
+                {
+                    //var xx = new ImageBrush(LoadImage(dialog.FileName));
+                    Background = LoadImage(dialog.FileName);
+                }
+            });
 
         public SolidColorBrush CanvasBrush
         {
@@ -71,6 +102,12 @@ namespace DndL.Gui.ViewModels
             }
         }
 
+        public BitmapImage Background
+        {
+            get => canvasBackground;
+            set => SetProperty(ref canvasBackground, value);
+        }
+
         public bool Brush1Enabled => activeBrush != brush1;
         public bool Brush2Enabled => activeBrush != brush2;
 
@@ -78,6 +115,19 @@ namespace DndL.Gui.ViewModels
 
 
 
+        private BitmapImage LoadImage(string filename)
+        {
+            //using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var img = new BitmapImage();
+
+            img.BeginInit();
+            img.UriSource = new Uri(filename, UriKind.Absolute);
+            //img.StreamSource = fs;
+            img.EndInit();
+
+            return img;
+
+        }
 
 
 

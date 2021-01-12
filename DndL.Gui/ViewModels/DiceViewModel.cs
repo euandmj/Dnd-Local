@@ -1,9 +1,10 @@
-﻿using DndL.Game._5e;
-using DndL.Game.Dice;
+﻿using DndL.Game.Dice;
+using DndL.Game.EoE;
 using DndL.Gui.Core.Commands;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using static DndL.Game.EoE.DiceDefinitions;
 
 namespace DndL.Gui.ViewModels
 {
@@ -11,20 +12,32 @@ namespace DndL.Gui.ViewModels
         : BaseViewModel
     {
         private string currValue;
+        private DieValueAttribute currAttr;
+        private IDie selectedDie;
 
         public DiceViewModel()
         {
-            // both declarations are acceptible.
-            DiceOptions = new List<Type> { typeof(BaseDie<FiveDieEnum>), typeof(FooDie) };
+            DiceOptions = new List<Type> 
+            { 
+                typeof(BaseDie<Boost>),
+                typeof(BaseDie<Ability>),
+                typeof(BaseDie<Proficiency>),
+                typeof(BaseDie<Setback>),
+                typeof(BaseDie<Difficulty>),
+                typeof(BaseDie<Challenge>),
+                typeof(BaseDie<Force>)
+            };
 
             DiceSwitchedCommand = new Command((x) =>
             {
-                CurrentValue = null;
-                SelectedDie = (IDie)Activator.CreateInstance((Type)x);
+                CurrentAttribute = null;
+                selectedDie = (IDie)Activator.CreateInstance((Type)x);
             });
             RollCommand = new Command((x) =>
             {
-                CurrentValue = SelectedDie.Roll().ToString();
+                var roll = selectedDie.Roll();
+                CurrentAttribute = roll.GetDieValue();
+                CurrentValue = CurrentAttribute is null ? roll.ToString() : CurrentAttribute.FriendlyName;
             });
         }
 
@@ -33,7 +46,14 @@ namespace DndL.Gui.ViewModels
             get => currValue;
             set => SetProperty(ref currValue, value);
         }
-        public IDie SelectedDie { get; set; }
+        public DieValueAttribute CurrentAttribute
+        {
+            get => currAttr;
+            set 
+            { 
+                SetProperty(ref currAttr, value); 
+            }
+        }
         public ICollection<Type> DiceOptions { get; init; }
         public ICommand DiceSwitchedCommand { get; }
         public ICommand RollCommand { get; }
