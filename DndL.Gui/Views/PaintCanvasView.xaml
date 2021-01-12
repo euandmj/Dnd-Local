@@ -33,6 +33,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.RowSpan="1"
+                Visibility="Hidden"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
             <ItemsControl ItemsSource="{Binding CanvasChildren, Mode=TwoWay}">
@@ -96,14 +97,15 @@
                               SelectedColor="{Binding ActiveBrush.Color, Mode=TwoWay, Converter={StaticResource BrushToColourConverter}}" />
         </StackPanel>
 
+        <!--
         <controls:SnappingGrid Grid.Column="0"
                             Grid.Row="1">
             
         </controls:SnappingGrid>
-
-        <!--<Grid x:Name="gridsnapper"
+        -->
+        <Grid x:Name="gridsnapper"
               ShowGridLines="True"
-              IsHitTestVisible="False"
+              IsHitTestVisible="True"
               Background="Transparent"
               VerticalAlignment="Stretch"
               HorizontalAlignment="Stretch"
@@ -121,7 +123,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-        </Grid>-->
+        </Grid>
 
     </Grid>
     

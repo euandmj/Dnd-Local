@@ -19,6 +19,9 @@ namespace DndL.Gui.Utility
 
         public SnappingGridUtil(FrameworkElement parent)
         {
+            //if (double.IsNaN(parent.Width) || double.IsNaN(parent.Height)) throw new System.ArgumentException("parent dimensions cannot be NaN", nameof(parent));
+
+
             Parent = parent;
         }
 
