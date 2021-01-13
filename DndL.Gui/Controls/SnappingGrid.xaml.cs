@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DndL.Gui.Utility;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -21,28 +22,53 @@ namespace DndL.Gui.Controls
     /// </summary>
     public partial class SnappingGrid : UserControl
     {
-        private readonly SnappingGridViewModel viewModel;
+        SnappingGridUtil<GridCellControl> sg;
+        private (int x, int y) lastPoint = default;
+        private Cursor cursorHand = Cursors.Hand;
 
         public SnappingGrid()
         {
             InitializeComponent();
-            //grid.DataContext = viewModel = new();
-            DataContext = viewModel = new();
 
+            sg = new SnappingGridUtil<GridCellControl>(this)
+            {
+                High = gridsnapper.RowDefinitions.Count,
+                Wide = gridsnapper.ColumnDefinitions.Count
+            };
 
-            viewModel.Items.Add(new GridCellControl { X = 1, Y = 1 });
-            viewModel.Items.Add(new GridCellControl { X = 2, Y = 2 });
-            viewModel.Items.Add(new GridCellControl { X = 3, Y = 1 });
-
-            grid.DataContext = viewModel.Items;
+            gridsnapper.MouseDown += this.Gridsnapper_MouseDown;
+            gridsnapper.MouseUp += this.Gridsnapper_MouseUp;
         }
-    }
 
-    public class SnappingGridViewModel
-    {
-        public ObservableCollection<GridCellControl> Items { get; set; } = new();
 
-        public int Columns { get; } = 5;
-        public int Rows { get; } = 5;
+        private void Gridsnapper_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            var p = sg.GetCell(e.GetPosition(gridsnapper));
+            var ctrl = sg.GetControlsAtPoint(gridsnapper, lastPoint).FirstOrDefault();
+
+            bool isDrag = ctrl != default && lastPoint != p;
+
+            if (isDrag)
+            {
+                // remove control, place it in new cell
+                gridsnapper.Children.Remove(ctrl);
+                sg.AddToCell(gridsnapper, ctrl, p);
+            }
+            else
+            {
+                // spawn a control
+                var lbl = new GridCellControl();
+                sg.AddToCell(gridsnapper, lbl, p);
+            }
+            Cursor = Cursors.Arrow;
+        }
+
+        private void Gridsnapper_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var p = lastPoint = sg.GetCell(e.GetPosition(gridsnapper));
+            Cursor = cursorHand;
+        }
+
+
     }
 }

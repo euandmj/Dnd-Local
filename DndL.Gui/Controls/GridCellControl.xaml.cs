@@ -25,7 +25,7 @@ namespace DndL.Gui.Controls
             InitializeComponent();
         }
 
-        public int X { get; init; }
-        public int Y { get; init; }
+        public int X => Grid.GetColumn(this);
+        public int Y => Grid.GetRow(this);
     }
 }

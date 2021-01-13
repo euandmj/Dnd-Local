@@ -27,7 +27,6 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
 
         <Canvas x:Name="Canvas"           
                 Grid.Row="1"
@@ -97,12 +96,16 @@
                               SelectedColor="{Binding ActiveBrush.Color, Mode=TwoWay, Converter={StaticResource BrushToColourConverter}}" />
         </StackPanel>
 
-        <!--
-        <controls:SnappingGrid Grid.Column="0"
-                            Grid.Row="1">
-            
+
+
+        <controls:SnappingGrid IsHitTestVisible="True"
+                               Grid.Column="0"
+                               Grid.Row="1">
+
         </controls:SnappingGrid>
-        -->
+
+
+        <!--
         <Grid x:Name="gridsnapper"
               ShowGridLines="True"
               IsHitTestVisible="True"
@@ -124,6 +127,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
         </Grid>
+        -->
 
     </Grid>
     
