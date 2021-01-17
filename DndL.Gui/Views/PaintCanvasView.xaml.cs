@@ -21,5 +21,6 @@ namespace DndL.Gui.Views
 
             DataContext = viewModel = new PaintCanvasViewModel();
         }
+
     }
 }

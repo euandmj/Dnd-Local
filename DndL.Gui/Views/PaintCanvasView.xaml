@@ -82,7 +82,7 @@
                     Command="{Binding Brush2Command}" />
             <Button Width="auto"
                     Height="auto"
-                    Content="Img"
+                    Content="{Binding Thumb}"
                     Command="{Binding SwitchBackgroundCommand}" />
 
 
@@ -104,6 +104,7 @@
 
         </controls:SnappingGrid>
 
+        
 
         <!--
         <Grid x:Name="gridsnapper"

@@ -13,7 +13,7 @@
         WindowStartupLocation="CenterScreen"
         Height="1050"
         Width="1650">
-    <Grid x:Name="grid" ShowGridLines="True">
+    <Grid x:Name="grid" ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".15*" />
             <ColumnDefinition Width="*" />

@@ -40,56 +40,16 @@
             </Style>
         </Grid.Resources>
 
-        <!--<ItemsControl x:Name="grid"
-                      ItemsSource="{Binding}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl> 
-
-        <ItemsControl x:Name="grid" ItemsSource="{Binding Items}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Rows="{Binding Rows}"
-                                 Columns="{Binding Columns}"
-                                 Background="Transparent"
-                                 x:Name="grid" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemContainerStyle>
-                <Style TargetType="local:GridCellControl">
-                    <Setter Property="Grid.Row"
-                            Value="{Binding Y}" />
-                    <Setter Property="Grid.Column"
-                            Value="{Binding X}" />
-                </Style>                
-            </ItemsControl.ItemContainerStyle>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="1"
-                            BorderBrush="Black">
-                        <Grid>
-                            <Rectangle Fill="Black" />
-                            <TextBlock Text="{Binding Name}" />
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>    
-        </ItemsControl>-->
+        <Thumb DragDelta="Thumb_DragDelta"
+               Grid.Row="0"
+               Grid.Column="999"
+               Background="Brown"
+               BorderBrush="Black"
+               BorderThickness="2"
+               Width="15"
+               Height="15"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Top">
+        </Thumb>
     </Grid>
 </UserControl>

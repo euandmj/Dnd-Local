@@ -7,32 +7,33 @@ using System.Linq;
 
 namespace DndL.Gui.Utility
 {
-    class SnappingGridUtil<TCtrl>
-        where TCtrl : GridCellControl
+    public class SnappingGridUtil
     {
         private readonly FrameworkElement _parent;
-        private readonly FrameworkElement _focusedControl;
+        private readonly Grid _grid;
 
-        public int High { get; init; }
-        public int Wide { get; init; }
+        public int Columns => _grid.ColumnDefinitions.Count;
+        public int Rows => _grid.RowDefinitions.Count;
 
-        public double CellWidth => _parent.ActualWidth / Wide;
-        public double CellHeight => _parent.ActualHeight / High;
+        public double CellWidth => _parent.ActualWidth / Columns;
+        public double CellHeight => _parent.ActualHeight / Rows;
 
-        public double Width => _parent.Width;
-        public double Height => _parent.Height;
+        public double Width => _parent.ActualWidth;
+        public double Height => _parent.ActualWidth;
 
 
-        public SnappingGridUtil(FrameworkElement parent)
+        public SnappingGridUtil(FrameworkElement parent, Grid focus)
         {
             _ = parent ?? throw new ArgumentNullException(nameof(parent));
-            //_ = focus ?? throw new System.ArgumentNullException(nameof(focus));
+            _ = focus ?? throw new System.ArgumentNullException(nameof(focus));
             if (double.IsNaN(parent.ActualWidth) || double.IsNaN(parent.ActualHeight)) throw new ArgumentException("parent dimensions cannot be NaN", nameof(parent));
 
 
             _parent = parent;
-            //_focusedControl = focus;
+            _grid = focus;
         }
+
+
 
         public (int x, int y) GetCell(Point point)
         {
@@ -52,30 +53,63 @@ namespace DndL.Gui.Utility
             return (column, row);
         }
 
-        public IEnumerable<UIElement> GetControlsAtPoint(Panel host, (int x, int y) cell)
+        public IEnumerable<GridCellControl> GetControlsAtPoint((int x, int y) cell)
         {
-            if (cell.x > Wide || cell.y > High) throw new ArgumentException(nameof(cell));
+            if (cell.x > Columns || cell.y > Rows) throw new ArgumentException(nameof(cell));
 
-            return host.Children.FindAll<TCtrl>(x => x.X == cell.x && x.Y == cell.y);
-            //return host.Children.FindAll<UIElement>(x => Grid.GetRow(x) == cell.y && Grid.GetColumn(x) == cell.x);
+            // GridCellControl interface
+            return _grid.Children.FindAll<GridCellControl>(x => x.X == cell.x && x.Y == cell.y);
         }
 
-        public void ClearCell((int x, int y) point, Panel host, int maxDepth = int.MaxValue)
+        public void ClearCell((int x, int y) point, int maxDepth = int.MaxValue)
         {
-            var found = GetControlsAtPoint(host, point).ToArray();
+            var element = GetControlsAtPoint(point).ToArray();
 
-            for (int i = 0; i < maxDepth && i < found.Length; i++)
+            for (int i = 0; i < maxDepth && i < element.Length; i++)
             {
-                host.Children.Remove(found[i]);
+                _grid.Children.Remove(element[i]);
             }
         }
 
-        public void AddToCell(Panel host, UIElement ctrl, (int x, int y) point)
+        public void AddToCell(GridCellControl ctrl, (int x, int y) point)
         {
             Grid.SetColumn(ctrl, point.x);
             Grid.SetRow(ctrl, point.y);
-            host.Children.Add(ctrl);
+            _grid.Children.Add(ctrl);
+            ctrl.Dragged();
         }
 
+        public void Resize(int newX, int newY)
+        {
+            int deltaX = Math.Abs(newX - Columns);
+            int deltaY = Math.Abs(newY - Rows);
+            bool incrX = newX > Columns;
+            bool incrY = newY > Rows;
+
+            for(int i = 0; i < deltaX; i++)
+            {
+
+                if (incrX)
+                {
+                    _grid.ColumnDefinitions.Add(new());
+                }
+                else if(Columns > 0)
+                {
+                    _grid.ColumnDefinitions.RemoveAt(Columns - 1);
+                }
+            }
+
+            for (int i = 0; i < deltaY; i++)
+            {
+                if (incrY)
+                {
+                    _grid.RowDefinitions.Add(new());
+                }
+                else if (Rows > 0)
+                {
+                    _grid.RowDefinitions.RemoveAt(Rows - 1);
+                }
+            }
+        }
     }
 }

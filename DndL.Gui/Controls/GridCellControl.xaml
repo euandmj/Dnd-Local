@@ -7,9 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
-        <Ellipse Fill="Blue"
+        <!--<Ellipse Fill="Blue"
                  Width="20" 
                  Height="20"
                  HorizontalAlignment="Center"
-                 VerticalAlignment="Center" />
+                 VerticalAlignment="Center" />-->
+
+    <Label Content="{Binding Textt}" />
 </UserControl>

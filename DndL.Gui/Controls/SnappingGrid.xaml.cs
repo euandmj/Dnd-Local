@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -22,7 +24,7 @@ namespace DndL.Gui.Controls
     /// </summary>
     public partial class SnappingGrid : UserControl
     {
-        SnappingGridUtil<GridCellControl> sg;
+        SnappingGridUtil sg;
         private (int x, int y) lastPoint = default;
         private Cursor cursorHand = Cursors.Hand;
 
@@ -30,35 +32,47 @@ namespace DndL.Gui.Controls
         {
             InitializeComponent();
 
-            sg = new SnappingGridUtil<GridCellControl>(this)
-            {
-                High = gridsnapper.RowDefinitions.Count,
-                Wide = gridsnapper.ColumnDefinitions.Count
-            };
+            sg = new SnappingGridUtil(this, gridsnapper);
 
             gridsnapper.MouseDown += this.Gridsnapper_MouseDown;
             gridsnapper.MouseUp += this.Gridsnapper_MouseUp;
         }
 
+        private void Thumb_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            Debug.WriteLine($"{e.HorizontalChange} : {e.VerticalChange}");
+
+            int xChange = (int)(e.HorizontalChange / 25);
+            int yChange = (int)(e.VerticalChange / 25);
+
+            sg.Resize(xChange, yChange);
+
+            if (e.HorizontalChange < 0)
+            {
+            }
+        }
+
 
         private void Gridsnapper_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            var p = sg.GetCell(e.GetPosition(gridsnapper));
-            var ctrl = sg.GetControlsAtPoint(gridsnapper, lastPoint).FirstOrDefault();
+            var point = sg.GetCell(e.GetPosition(gridsnapper));
+            var topControlInCell = sg.GetControlsAtPoint(lastPoint).FirstOrDefault();
 
-            bool isDrag = ctrl != default && lastPoint != p;
+            bool isDrag = topControlInCell != default && lastPoint != point;
 
             if (isDrag)
             {
                 // remove control, place it in new cell
-                gridsnapper.Children.Remove(ctrl);
-                sg.AddToCell(gridsnapper, ctrl, p);
+                gridsnapper.Children.Remove(topControlInCell);
+                sg.ClearCell(point);
+                sg.AddToCell(topControlInCell, point);
             }
             else
             {
                 // spawn a control
                 var lbl = new GridCellControl();
-                sg.AddToCell(gridsnapper, lbl, p);
+                sg.ClearCell(point);
+                sg.AddToCell(lbl, point);
             }
             Cursor = Cursors.Arrow;
         }
@@ -68,7 +82,5 @@ namespace DndL.Gui.Controls
             var p = lastPoint = sg.GetCell(e.GetPosition(gridsnapper));
             Cursor = cursorHand;
         }
-
-
     }
 }

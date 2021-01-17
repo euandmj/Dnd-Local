@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DndL.Gui.Utility;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,14 +20,25 @@ namespace DndL.Gui.Controls
     /// <summary>
     /// Interaction logic for GridCellControl.xaml
     /// </summary>
-    public partial class GridCellControl : UserControl
+    public partial class GridCellControl : UserControl, INotifyPropertyChanged
     {
         public GridCellControl()
         {
             InitializeComponent();
+
+            DataContext = this;
         }
+
+        public string Textt => $"{X}:{Y}";
 
         public int X => Grid.GetColumn(this);
         public int Y => Grid.GetRow(this);
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void Dragged()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Textt)));
+        }
     }
 }
