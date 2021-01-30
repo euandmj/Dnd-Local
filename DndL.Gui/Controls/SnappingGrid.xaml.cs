@@ -38,6 +38,17 @@ namespace DndL.Gui.Controls
             sg = new SnappingGridUtil(this, grid);
         }
 
+        public int ColumnCount => sg.Columns;
+        public int RowCount => sg.Rows;
+
+
+        public void Resize(int c, int r)
+        {
+            // TODO: validate value
+            sg.Resize(c, r);
+        }
+
+
         private void Thumb_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
         {
             Debug.WriteLine($"{e.HorizontalChange} : {e.VerticalChange}");

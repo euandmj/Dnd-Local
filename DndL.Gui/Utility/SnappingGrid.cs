@@ -24,13 +24,9 @@ namespace DndL.Gui.Utility
 
         public SnappingGridUtil(FrameworkElement parent, Grid focus)
         {
-            _ = parent ?? throw new ArgumentNullException(nameof(parent));
-            _ = focus ?? throw new System.ArgumentNullException(nameof(focus));
+            _parent = parent ?? throw new ArgumentNullException(nameof(parent));
+            _grid = focus ?? throw new ArgumentNullException(nameof(focus));
             if (double.IsNaN(parent.ActualWidth) || double.IsNaN(parent.ActualHeight)) throw new ArgumentException("parent dimensions cannot be NaN", nameof(parent));
-
-
-            _parent = parent;
-            _grid = focus;
         }
 
         public (int x, int y) GetCell(Point point)

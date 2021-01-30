@@ -19,7 +19,11 @@
         <ResourceDictionary>
             <lcvtr:BrushToColourConverter x:Key="BrushToColourConverter" />
             <lcvtr:CanvasModeToBoolConverter x:Key="ModeConverter" />
-        </ResourceDictionary>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="Padding"
+                        Value="3" />
+            </Style>
+        </ResourceDictionary>        
     </UserControl.Resources>
 
     <Grid>
@@ -72,7 +76,8 @@
             </Canvas.Background>
         </Canvas>
 
-        <StackPanel Orientation="Horizontal"
+        <StackPanel x:Name="MenuBar" 
+                    Orientation="Horizontal"
                     VerticalAlignment="Stretch"
                     Grid.Row="0"
                     Grid.Column="0">
@@ -80,21 +85,25 @@
             <Button Width="auto"
                     Height="auto"
                     Content="Move"
+                    Style="{StaticResource ButtonStyle}"
                     IsEnabled="{Binding MoveEnabled}"
                     Command="{Binding MoveCommand}" />
             <Button Width="auto"
                     Height="auto"
                     Content="Brush1"
+                    Style="{StaticResource ButtonStyle}"
                     IsEnabled="{Binding Brush1Enabled}"
                     Command="{Binding Brush1Command}" />
             <Button Width="auto"
                     Height="auto"
                     Content="Brush2"
+                    Style="{StaticResource ButtonStyle}"
                     IsEnabled="{Binding Brush2Enabled}"
                     Command="{Binding Brush2Command}" />
             <Button Width="auto"
                     Height="auto"
-                    Content="{Binding Thumb}"
+                    Content="Background"
+                    Style="{StaticResource ButtonStyle}"
                     Command="{Binding SwitchBackgroundCommand}" />
 
 
@@ -102,16 +111,44 @@
                                DefaultValue="{Binding ActiveBrush.Thickness, Mode=OneTime}"
                                Minimum="1"
                                Maximum="70"
-                               Width="auto"/>            
+                               MinWidth="10"
+                               Width="auto">
+                <xctk:DoubleUpDown.IsEnabled>
+                    <Binding Path="CanvasMode"
+                             Converter="{StaticResource ModeConverter}">
+                        <Binding.ConverterParameter>
+                            <modes:CanvasMode>Brush</modes:CanvasMode>
+                        </Binding.ConverterParameter>
+                    </Binding>
+                </xctk:DoubleUpDown.IsEnabled>
+            </xctk:DoubleUpDown>
 
             <xctk:ColorPicker Width="70"
-                              SelectedColor="{Binding ActiveBrush.Color, Mode=TwoWay, Converter={StaticResource BrushToColourConverter}}" />
+                              SelectedColor="{Binding ActiveBrush.Color, Mode=TwoWay, Converter={StaticResource BrushToColourConverter}}">
+                <xctk:ColorPicker.IsEnabled>
+                    <Binding Path="CanvasMode"
+                             Converter="{StaticResource ModeConverter}">
+                        <Binding.ConverterParameter>
+                            <modes:CanvasMode>Brush</modes:CanvasMode>
+                        </Binding.ConverterParameter>
+                    </Binding>
+                </xctk:ColorPicker.IsEnabled>
+            </xctk:ColorPicker>
+
+            <Button Width="auto"
+                    Height="auto"
+                    Content="⚙"
+                    Style="{StaticResource ButtonStyle}"
+                    Click="SettingsButton_Click"/>
+
+
         </StackPanel>
 
 
 
-        <controls:SnappingGrid  Grid.Column="0"
-                                Grid.Row="1">
+        <controls:SnappingGrid x:Name="SnappingGrid"
+                               Grid.Column="0"
+                               Grid.Row="1">
             <controls:SnappingGrid.IsHitTestVisible>
                 <Binding Path="CanvasMode"
                          Converter="{StaticResource ModeConverter}">

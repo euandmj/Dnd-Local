@@ -78,7 +78,7 @@ namespace DndL.Gui.ViewModels
                     LineDrawn?.Invoke(
                         new DrawnLineEventArgs(
                             currentLine.ToDrawnLine(ActiveBrush.Color,
-                            ActiveBrush.Thickness)));
+                                                    ActiveBrush.Thickness)));
             });
         public ICommand SwitchBackgroundCommand
             => new Command((x) =>

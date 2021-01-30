@@ -22,5 +22,23 @@ namespace DndL.Gui.Views
             DataContext = viewModel = new PaintCanvasViewModel();
         }
 
+        private void SettingsButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            // TODO: roll into global config
+            var win = new CanvasSettingsWindow();
+            win.Import(new()
+            {
+                IsFogEnabled = false,
+                Rows = SnappingGrid.RowCount,
+                Columns = SnappingGrid.ColumnCount
+            });
+            var result = win.ShowDialog();
+            if(result.HasValue &&
+                result.Value == true)
+            {
+                var newCfg = win.Export();
+                SnappingGrid.Resize(newCfg.Columns, newCfg.Rows);
+            }
+        }
     }
 }
