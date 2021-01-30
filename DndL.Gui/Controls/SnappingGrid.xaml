@@ -10,8 +10,9 @@
     <Grid    
         Background="Transparent"
         IsHitTestVisible="True"
-        PreviewMouseDown="Gridsnapper_MouseDown"
-        x:Name="gridsnapper"
+        PreviewMouseDown="Grid_MouseDown"
+        PreviewMouseUp="Grid_MouseUp"
+        x:Name="grid"
         ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -39,17 +40,5 @@
                         Value="{Binding Y}" />
             </Style>
         </Grid.Resources>
-
-        <Thumb DragDelta="Thumb_DragDelta"
-               Grid.Row="0"
-               Grid.Column="999"
-               Background="Brown"
-               BorderBrush="Black"
-               BorderThickness="2"
-               Width="15"
-               Height="15"
-               HorizontalAlignment="Right"
-               VerticalAlignment="Top">
-        </Thumb>
     </Grid>
 </UserControl>

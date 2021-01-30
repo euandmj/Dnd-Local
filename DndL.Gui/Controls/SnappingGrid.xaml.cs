@@ -24,6 +24,9 @@ namespace DndL.Gui.Controls
     /// </summary>
     public partial class SnappingGrid : UserControl
     {
+        public event EventHandler<EventArgs> GridResized;
+
+
         SnappingGridUtil sg;
         private (int x, int y) lastPoint = default;
         private Cursor cursorHand = Cursors.Hand;
@@ -32,10 +35,7 @@ namespace DndL.Gui.Controls
         {
             InitializeComponent();
 
-            sg = new SnappingGridUtil(this, gridsnapper);
-
-            gridsnapper.MouseDown += this.Gridsnapper_MouseDown;
-            gridsnapper.MouseUp += this.Gridsnapper_MouseUp;
+            sg = new SnappingGridUtil(this, grid);
         }
 
         private void Thumb_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
@@ -53,9 +53,9 @@ namespace DndL.Gui.Controls
         }
 
 
-        private void Gridsnapper_MouseUp(object sender, MouseButtonEventArgs e)
+        private void Grid_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            var point = sg.GetCell(e.GetPosition(gridsnapper));
+            var point = sg.GetCell(e.GetPosition(grid));
             var topControlInCell = sg.GetControlsAtPoint(lastPoint).FirstOrDefault();
 
             bool isDrag = topControlInCell != default && lastPoint != point;
@@ -63,23 +63,31 @@ namespace DndL.Gui.Controls
             if (isDrag)
             {
                 // remove control, place it in new cell
-                gridsnapper.Children.Remove(topControlInCell);
-                sg.ClearCell(point);
-                sg.AddToCell(topControlInCell, point);
+                //grid.Children.Remove(topControlInCell);
+                //sg.ClearCell(point);
+                //sg.AddToCell(topControlInCell, point);
+                Grid.SetColumn(topControlInCell, point.x);
+                Grid.SetRow(topControlInCell, point.y);
+                topControlInCell.Dragged();
             }
             else
             {
                 // spawn a control
                 var lbl = new GridCellControl();
+
                 sg.ClearCell(point);
-                sg.AddToCell(lbl, point);
+
+                Grid.SetColumn(lbl, point.x);
+                Grid.SetRow(lbl, point.y);
+                grid.Children.Add(lbl);
+                lbl.Dragged();
             }
             Cursor = Cursors.Arrow;
         }
 
-        private void Gridsnapper_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var p = lastPoint = sg.GetCell(e.GetPosition(gridsnapper));
+            var p = lastPoint = sg.GetCell(e.GetPosition(grid));
             Cursor = cursorHand;
         }
     }

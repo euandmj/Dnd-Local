@@ -33,8 +33,6 @@ namespace DndL.Gui.Utility
             _grid = focus;
         }
 
-
-
         public (int x, int y) GetCell(Point point)
         {
             int row = -1, column = -1;
@@ -55,7 +53,7 @@ namespace DndL.Gui.Utility
 
         public IEnumerable<GridCellControl> GetControlsAtPoint((int x, int y) cell)
         {
-            if (cell.x > Columns || cell.y > Rows) throw new ArgumentException(nameof(cell));
+            if (cell.x > Columns || cell.y > Rows) throw new ArgumentException("cell is not contained", nameof(cell));
 
             // GridCellControl interface
             return _grid.Children.FindAll<GridCellControl>(x => x.X == cell.x && x.Y == cell.y);
@@ -69,14 +67,6 @@ namespace DndL.Gui.Utility
             {
                 _grid.Children.Remove(element[i]);
             }
-        }
-
-        public void AddToCell(GridCellControl ctrl, (int x, int y) point)
-        {
-            Grid.SetColumn(ctrl, point.x);
-            Grid.SetRow(ctrl, point.y);
-            _grid.Children.Add(ctrl);
-            ctrl.Dragged();
         }
 
         public void Resize(int newX, int newY)
