@@ -1,0 +1,68 @@
+﻿<Window x:Class="DndL.Gui.Views.CanvasSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DndL.Gui.Views"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="CanvasSettingsWindow"
+        Height="250"
+        Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    Margin="0 20 0 20"
+                    Grid.Row="0">
+
+            <CheckBox IsChecked="False"
+                      HorizontalAlignment="Center"
+                      Content="Toggle Fog" />
+
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Label Content="Columns"></Label>
+                <xctk:IntegerUpDown Value="{Binding ColumnCount, Mode=TwoWay}"
+                                    Minimum="1"
+                                    Maximum="10" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Label Content="Rows"></Label>
+                <xctk:IntegerUpDown Value="{Binding RowCount, Mode=TwoWay}"
+                                    Minimum="1"
+                                    Maximum="10" />
+            </StackPanel>
+
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Grid.Row="1"
+                    Margin="0 0 0 20">
+            <Button Content="OK"
+                    Height="35"
+                    Margin="5"
+                    Click="Ok_Click"
+                    Padding="10" />
+            <Button Content="Cancel"
+                    Height="35"
+                    Margin="5"
+                    Click="Cancel_Click"
+                    Padding="10" />
+
+        </StackPanel>
+
+
+
+    </Grid>
+</Window>

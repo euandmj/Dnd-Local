@@ -4,10 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DndL.Gui.Controls"
-             mc:Ignorable="d"
+             IsHitTestVisible="True"
+             mc:Ignorable="d"             
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-
+    <Grid    
+        Background="Transparent"
+        IsHitTestVisible="True"
+        PreviewMouseDown="Grid_MouseDown"
+        PreviewMouseUp="Grid_MouseUp"
+        x:Name="grid"
+        ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions> 
+        
         <Grid.Resources>
             <DataTemplate DataType="{x:Type local:GridCellControl}">
                 <Border BorderBrush="Black"
@@ -21,68 +40,5 @@
                         Value="{Binding Y}" />
             </Style>
         </Grid.Resources>
-
-        <ItemsControl x:Name="grid"
-                      ItemsSource="{Binding}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-        
-             
-        
-        
-        
-        
-        
-        
-        
-
-
-        <!--<ItemsControl x:Name="grid" ItemsSource="{Binding Items}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Rows="{Binding Rows}"
-                                 Columns="{Binding Columns}"
-                                 Background="Transparent"
-                                 x:Name="grid" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemContainerStyle>
-                <Style TargetType="local:GridCellControl">
-                    <Setter Property="Grid.Row"
-                            Value="{Binding Y}" />
-                    <Setter Property="Grid.Column"
-                            Value="{Binding X}" />
-                </Style>                
-            </ItemsControl.ItemContainerStyle>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="1"
-                            BorderBrush="Black">
-                        <Grid>
-                            <Rectangle Fill="Black" />
-                            <TextBlock Text="{Binding Name}" />
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>    
-        </ItemsControl>-->
-
     </Grid>
 </UserControl>

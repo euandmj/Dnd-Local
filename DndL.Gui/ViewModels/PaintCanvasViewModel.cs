@@ -1,6 +1,7 @@
 ﻿using DndL.Client.Extensions;
 using DndL.Core.Events;
 using DndL.Gui.Core.Commands;
+using DndL.Gui.Core.Modes;
 using DndL.Gui.Model;
 using Microsoft.Win32;
 using System;
@@ -21,10 +22,14 @@ namespace DndL.Gui.ViewModels
     {
         public DrawnLineEventHandler LineReceived;
         public DrawnLineEventHandler LineDrawn;
+        public event EventHandler<CanvasModeChangedEventArgs> ModeChanged;
+
 
         private CanvasBrush activeBrush;
         private readonly CanvasBrush brush1 = new();
         private readonly CanvasBrush brush2 = new();
+
+        private CanvasMode currentMode;
 
         private BitmapImage canvasBackground;
 
@@ -40,8 +45,16 @@ namespace DndL.Gui.ViewModels
             LineDrawn += OnLineDrawn;
             LineReceived += OnLineReceived;
 
-            Brush1Command = new Command((x) => ActiveBrush = brush1);
-            Brush2Command = new Command((x) => ActiveBrush = brush2);
+            Brush1Command = new Command((x) =>
+            {
+                CanvasMode = CanvasMode.Brush;
+                ActiveBrush = brush1;
+            });
+            Brush2Command = new Command((x) =>
+            {
+                CanvasMode = CanvasMode.Brush;
+                ActiveBrush = brush2;
+            });
             //MouseUpCommand = new Command((x) =>
             //{
             //    if (currentLine?.Points?.Count > 0)
@@ -65,7 +78,7 @@ namespace DndL.Gui.ViewModels
                     LineDrawn?.Invoke(
                         new DrawnLineEventArgs(
                             currentLine.ToDrawnLine(ActiveBrush.Color,
-                            ActiveBrush.Thickness)));
+                                                    ActiveBrush.Thickness)));
             });
         public ICommand SwitchBackgroundCommand
             => new Command((x) =>
@@ -84,6 +97,13 @@ namespace DndL.Gui.ViewModels
                     Background = LoadImage(dialog.FileName);
                 }
             });
+        public ICommand MoveCommand
+            => new Command((x) =>
+            {
+                CanvasMode = CanvasMode.Grid;
+                ActiveBrush = null;
+            });
+
 
         public SolidColorBrush CanvasBrush
         {
@@ -99,6 +119,7 @@ namespace DndL.Gui.ViewModels
                 SetProperty(ref activeBrush, value);
                 OnPropertyChanged(nameof(Brush1Enabled));
                 OnPropertyChanged(nameof(Brush2Enabled));
+                OnPropertyChanged(nameof(MoveEnabled));
             }
         }
 
@@ -108,8 +129,23 @@ namespace DndL.Gui.ViewModels
             set => SetProperty(ref canvasBackground, value);
         }
 
+        public CanvasMode CanvasMode
+        {
+            get => currentMode;
+            set
+            {
+                SetProperty(
+                    ref currentMode, 
+                    value, 
+                    nameof(CanvasMode), 
+                    () => ModeChanged?.Invoke(this, new(currentMode, value)));
+            }
+        }
+
+
         public bool Brush1Enabled => activeBrush != brush1;
         public bool Brush2Enabled => activeBrush != brush2;
+        public bool MoveEnabled => currentMode != CanvasMode.Grid;
 
 
 

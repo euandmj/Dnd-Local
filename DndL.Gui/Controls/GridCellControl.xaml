@@ -7,9 +7,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
+    <StackPanel Orientation="Vertical">
+        <Label Content="{Binding Text}" />
+
+
+        <Image Source="{Binding Image}" />
+
         <Ellipse Fill="Blue"
                  Width="20" 
                  Height="20"
                  HorizontalAlignment="Center"
                  VerticalAlignment="Center" />
+        
+        
+        
+    </StackPanel>
 </UserControl>
