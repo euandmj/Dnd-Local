@@ -26,7 +26,6 @@ namespace DndL.Server
             }
 
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<PointServiceGrpcServer>();

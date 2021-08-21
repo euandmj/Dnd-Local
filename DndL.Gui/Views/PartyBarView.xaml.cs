@@ -26,6 +26,11 @@ namespace DndL.Gui.Views
                 PlayerSelectedEvent?.Invoke(s, e);
             };
         }
+
+        private void UserControl_DragLeave(object sender, System.Windows.DragEventArgs e)
+        {
+
+        }
     }
     
 }

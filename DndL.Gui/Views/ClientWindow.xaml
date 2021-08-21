@@ -22,9 +22,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.2*" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
+        
         
         <!--Row 0 -->
         <views:PaintCanvasView x:Name="Canvas"
@@ -56,11 +57,29 @@
             
         </gviews:EntityDescriptionView>
         
-        <!--Row 2-->
+        <!--Row 2--> 
+
+        <views:PartyBarView x:Name="partyBar"
+                               VerticalAlignment="Stretch"
+                               HorizontalAlignment="Center"
+                            DragLeave="partyBar_DragLeave"
+                               Grid.Column="1"
+                               Grid.Row="2">
+
+        </views:PartyBarView>
+        
+
+        <views:DiceView Grid.Row="2"
+                        Grid.Column="2">
+
+        </views:DiceView>
+
+
+        <!--Row 3-->
         
         <Grid FlowDirection="LeftToRight"
               HorizontalAlignment="Stretch"
-              Grid.Row="2"
+              Grid.Row="3"
               Grid.Column="1"
               x:Name="selfGrid">
             <Grid.ColumnDefinitions>
@@ -83,21 +102,7 @@
             </gviews:PlayerSpellsView>
         </Grid>
 
-
-        <views:DiceView Grid.Row="2"
-                        Grid.Column="2">
-            
-        </views:DiceView>
         
-        <!--Row 3--> 
-
-        <views:PartyBarView x:Name="partyBar"
-                               VerticalAlignment="Stretch"
-                               HorizontalAlignment="Center"
-                               Grid.Column="1"
-                               Grid.Row="3">
-            
-        </views:PartyBarView>
 
     </Grid>
 </Window>

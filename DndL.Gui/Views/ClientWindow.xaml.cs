@@ -52,5 +52,10 @@ namespace DndL.Gui.Views
                 //selfGrid.Children.Add(selfSkills);
             }
         }
+
+        private void partyBar_DragLeave(object sender, DragEventArgs e)
+        {
+
+        }
     }
 }

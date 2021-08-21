@@ -12,7 +12,8 @@ namespace DndL.Game.Modules
             builder
                 .RegisterType<_5e._5eGame>()
                 .As<IGame>()
-                .InstancePerLifetimeScope();
+                .InstancePerLifetimeScope()
+                .OnActivated((x) => x.Instance.Init());
             builder
                 .RegisterType<_5e._5eGameServer>()
                 .As<IGameServer>()

@@ -25,8 +25,6 @@ namespace DndL.Game._5e
             client = new();
                         
             Party = new ObservableConcurrentDictionary<Guid, IBaseCharacter>();
-
-            //LoadPlayers();
         }
 
         private void LoadPlayers()
